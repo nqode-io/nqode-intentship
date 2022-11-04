@@ -1,0 +1,30 @@
+@import 'variables.scss';
+
+.c-app {
+  &__button {
+    padding: $space-xs $space-s;
+    margin: $space-s;
+
+    background: $color-blue;
+    color: $color-white;
+
+    font-size: $fs-base;
+    border: 1px solid $color-blue;
+    cursor: pointer;
+
+    &:hover {
+      background: $color-white;
+      color: $color-blue;
+    }
+
+    &--secondary {
+      background: $color-white;
+      color: $color-blue;
+
+      &:hover {
+        background: $color-blue;
+        color: $color-white;
+      }
+    }
+  }
+}
