@@ -1,12 +1,15 @@
-@import '../../../variables.scss';
+@import 'variables.scss';
 
 .c-footer {
-    background-color: $color-blue;
-    position: absolute;
-    bottom: 0;
-    color: $color-white;
-    width: 100%;
-    height: $space-xl;
-    text-align: center;
-    padding: $space-s 0;
+width: 100%;
+height: $space-xl;
+
+position: absolute;
+bottom: 0;
+
+padding: $space-s 0;
+text-align: center;
+
+background-color: $color-blue;
+color: $color-white;
 }

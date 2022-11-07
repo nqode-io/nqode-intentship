@@ -1,9 +1,4 @@
-@import '../../../variables.scss';
-
-*{
-    padding: 0;
-    margin: 0;
-}
+@import 'variables.scss';
 
 .c-header {
     background-color: $color-blue;
@@ -12,6 +7,7 @@
     padding: $space-l $space-l;
     text-align: center;
     vertical-align: middle;
+
     &__logo{
         display: inline-block;
         width: 30%;
@@ -19,17 +15,20 @@
         font-size: $fs-medium;
         font-weight: bold;
     }
+
     &__nav{
         width: 60%;
         text-align: right;
         display: inline-block;
         height: 100%;
     }
+
     &__nav-links{
         margin-right: $space-s;
         list-style-type: none;
         height: 100%;
     }
+    
     &__nav-link{
         height: 100%;
         margin: 0 $space;
