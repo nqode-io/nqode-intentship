@@ -1,9 +1,9 @@
 @import 'variables.scss';
 
 .c-button {
-  padding: 6px;
+  padding: $space-s;
 
-  border-radius: 6px;
+  border-radius: $space-xs;
   border-color: $color-blue;
 
   color: $color-white;

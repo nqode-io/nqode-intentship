@@ -6,13 +6,13 @@
   flex-direction: column;
 
   &__label {
-    margin-bottom: 5px;
+    margin-bottom: $space-xs;
     font-size: $fs-large;
   }
 
   &__input-field {
-    padding: 5px;
-    border-radius: 5px;
+    padding: $space-xs;
+    border-radius: $space-xs;
     border-color: $color-blue;
   }
 }
