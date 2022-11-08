@@ -1,35 +1,38 @@
-@import '../../variables.scss';
+@import 'variables.scss';
 
 .c-login {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    padding: $space-xs $space-s;
+    margin: auto;
+
+    max-width: fit-content;
+    max-height: fit-content;
+
+    background: $color-gray;
+    color: $color-black;
+
+    border-radius: 5%;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
+    flex-direction: column;
 
-    &__container {
-        padding: $space-xs $space-s;
-        margin: auto;
+    &__span {
+      padding: $space-xs $space-s;
+      margin: $space-s;
 
-        max-width: fit-content;
-        max-height: fit-content;
-
-        background: $color-gray;
-        color: $color-black;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-
-        &__span {
-            padding: $space-xs $space-s;
-            margin: $space-s;
-        }
-
-        &__button-container {
-            padding: $space-xs $space-s;
-
-        }
-
+      font-size: $fs-base;
     }
+
+    &__button-container {
+      padding: $space-xs $space-s;
+    }
+  }
 }

@@ -1,3 +1,8 @@
+@import 'variables.scss';
+
 .c-button {
-    border: none;
+  background: transparent;
+  font-size: $fs-medium;
+  border: none;
+  cursor: pointer;
 }
