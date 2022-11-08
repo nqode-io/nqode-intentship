@@ -1,0 +1,35 @@
+@import '../../variables.scss';
+
+.c-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    &__container {
+        padding: $space-xs $space-s;
+        margin: auto;
+
+        max-width: fit-content;
+        max-height: fit-content;
+
+        background: $color-gray;
+        color: $color-black;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &__span {
+            padding: $space-xs $space-s;
+            margin: $space-s;
+        }
+
+        &__button-container {
+            padding: $space-xs $space-s;
+
+        }
+
+    }
+}
