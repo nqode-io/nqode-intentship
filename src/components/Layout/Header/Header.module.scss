@@ -8,7 +8,7 @@
     text-align: center;
     vertical-align: middle;
 
-    &__logo{
+    &__logo {
         display: inline-block;
         width: 30%;
         text-align: left;
@@ -16,27 +16,27 @@
         font-weight: bold;
     }
 
-    &__nav{
+    &__nav {
         width: 60%;
         text-align: right;
         display: inline-block;
         height: 100%;
     }
 
-    &__nav-links{
+    &__nav-links {
         margin-right: $space-s;
         list-style-type: none;
         height: 100%;
     }
     
-    &__nav-link{
+    &__nav-link {
         height: 100%;
         margin: 0 $space;
         display: inline-block;
         text-decoration: none;
         font-size: $fs-medium;
 
-        &:hover{
+        &:hover {
             color: $color-black;
             cursor: pointer;
         }

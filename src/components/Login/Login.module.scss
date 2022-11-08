@@ -1,0 +1,61 @@
+@import 'variables.scss';
+
+.c-login {
+    height: 100vh;
+    display: flex;
+
+    &__about {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        width: 50%;
+
+        background-color: $color-blue;
+    }
+
+    &__about-logo {
+        margin-bottom: $space-l;
+
+        color: $color-white;
+
+        font-size: 6rem;
+    }
+
+    &__about-moto {
+        font-size: $fs-large;
+        color: $color-white;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        width: 50%;
+
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+
+        width: 65%;
+
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    &__register-info {
+        margin-top: 1rem;
+    }
+
+    &__error-message {
+        color: red;
+
+        margin-top: 15px;
+    }
+
+}

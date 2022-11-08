@@ -2,17 +2,17 @@ import React from 'react'
 import Footer from './Footer/Footer'
 import Header from './Header/Header'
 
-// interface IStandardLayoutProps {
-//   name: string;
-// }
+interface StandardLayoutProps {
+  children: JSX.Element;
+}
 
-const StandardLayout = (/*{ name }: IStandardLayoutProps*/ props: any) => {
+const StandardLayout = ({children} : StandardLayoutProps) => {
   return (
     <>
       <Header/>
-      <div>
-        {props.children}
-      </div>
+        <div>
+          {children}
+        </div>
       <Footer/>
     </>
   )
