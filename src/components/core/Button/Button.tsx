@@ -1,15 +1,17 @@
-import React from 'react'
-import classes from './Button.module.scss'
+import React from 'react';
+import classes from './Button.module.scss';
 
-interface ButtonProps{
-    name: string
-    clickHandler: () => void;
+interface ButtonProps {
+  name: string;
+  clickHandler: () => void;
 }
 
-const Button = ({name, clickHandler} : ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ name, clickHandler }) => {
   return (
-    <button className={classes['c-button']} onClick={clickHandler}>{name}</button>
-  )
-}
+    <button className={classes['c-button']} onClick={clickHandler}>
+      {name}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

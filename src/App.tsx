@@ -7,9 +7,9 @@ import StandardLayout from './components/Layout/StandardLayout';
 const App = () => {
   return (
     <BrowserRouter>
-        <Routes>
-            <Route path='/login' element={<Login/>}/>
-        </Routes>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </BrowserRouter>
   );
 };
