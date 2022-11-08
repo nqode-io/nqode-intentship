@@ -4,13 +4,13 @@ import classes from './Login.module.scss';
 import Input from '../core/Input/Input';
 import Button from '../core/Button/Button';
 
-interface Credentials {
+interface CredentialsProps {
   username: string;
   password: string;
 }
 
 const Login = () => {
-  const [credentials, setCredentials] = useState<Credentials>({
+  const [credentials, setCredentials] = useState<CredentialsProps>({
     username: '',
     password: ''
   });
@@ -21,8 +21,6 @@ const Login = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-
-    console.log('username: ' + credentials.username + ' password: ' + credentials.password);
   };
 
   return (
