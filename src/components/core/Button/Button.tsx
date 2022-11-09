@@ -3,11 +3,11 @@ import classes from './Button.module.scss';
 
 interface ButtonProps {
   content: string;
-  action: () => void;
+  onClick: () => void;
 }
-const Button: React.FC<ButtonProps> = ({ content, action }) => {
+const Button: React.FC<ButtonProps> = ({ content, onClick }) => {
   return (
-    <button className={classes['c-button']} onClick={action}>
+    <button className={classes['c-button']} onClick={onClick}>
       {content}
     </button>
   );

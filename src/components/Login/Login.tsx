@@ -4,13 +4,13 @@ import classes from './Login.module.scss';
 import Input from '../core/Input/Input';
 import Button from '../core/Button/Button';
 
-interface CredentialsProps {
+interface CredentialsForm {
   username: string;
   password: string;
 }
 
 const Login = () => {
-  const [credentials, setCredentials] = useState<CredentialsProps>({
+  const [credentials, setCredentials] = useState<CredentialsForm>({
     username: '',
     password: ''
   });
@@ -26,16 +26,16 @@ const Login = () => {
   return (
     <div className={classes['c-login']}>
       <div className={classes['c-login__container']}>
-        <div className={classes['-login__container__span--container']}>
-          <span className={classes['c-login__container__span']}>Username</span>
-          <Input name="username" action={handleChange}></Input>
+        <div className={classes['c-login__input-container']}>
+          <label className={classes['c-login__input-label']}>Username</label>
+          <Input name="username" onChange={handleChange}></Input>
         </div>
-        <div className={classes['-login__container__span--container']}>
-          <span className={classes['c-login__container__span']}>Password</span>
-          <Input name="password" action={handleChange}></Input>
+        <div className={classes['-login__input-container']}>
+          <label className={classes['c-login__input-label']}>Password</label>
+          <Input name="password" onChange={handleChange}></Input>
         </div>
-        <div className={classes['c-login__container__button-container']}>
-          <Button content="Log in" action={handleLogin}></Button>
+        <div className={classes['c-login__button-container']}>
+          <Button content="Log in" onClick={handleLogin}></Button>
         </div>
       </div>
     </div>

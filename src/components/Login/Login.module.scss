@@ -17,22 +17,22 @@
     background: $color-gray;
     color: $color-black;
 
-    border-radius: 5%;
+    border-radius: $space-s;
 
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+  }
 
-    &__span {
-      padding: $space-xs $space-s;
-      margin: $space-s;
+  &__input-label {
+    padding: $space-xs $space-s;
+    margin: $space-s;
 
-      font-size: $fs-base;
-    }
+    font-size: $fs-base;
+  }
 
-    &__button-container {
-      padding: $space-xs $space-s;
-    }
+  &__button-container {
+    padding: $space-xs $space-s;
   }
 }
