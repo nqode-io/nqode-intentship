@@ -11,14 +11,21 @@
     padding: $space-xs $space-s;
     margin: auto;
 
-    max-width: fit-content;
-    max-height: fit-content;
+    width: $ds-base;
+    height: $ds-s;
 
-    background: $color-gray;
+    background: $color-green;
     color: $color-black;
 
     border-radius: $space-s;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__input-container {
     display: flex;
     align-items: center;
     justify-content: center;

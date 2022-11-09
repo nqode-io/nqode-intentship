@@ -3,6 +3,7 @@ import { useState } from 'react';
 import classes from './Login.module.scss';
 import Input from '../core/Input/Input';
 import Button from '../core/Button/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface CredentialsForm {
   username: string;
@@ -15,8 +16,11 @@ const Login = () => {
     password: ''
   });
 
+  const navigate = useNavigate();
+
   const handleLogin = () => {
     //login logic
+    navigate('/booksoverview');
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +34,7 @@ const Login = () => {
           <label className={classes['c-login__input-label']}>Username</label>
           <Input name="username" onChange={handleChange}></Input>
         </div>
-        <div className={classes['-login__input-container']}>
+        <div className={classes['c-login__input-container']}>
           <label className={classes['c-login__input-label']}>Password</label>
           <Input name="password" onChange={handleChange}></Input>
         </div>
