@@ -1,16 +1,20 @@
+import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import Input from 'components/core/Input/Input';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import authService from 'services/auth-service';
 import classes from './Login.module.scss';
 
+const backend_url = process.env.REACT_APP_BACKEND_URL;
+
 const Login: React.FC = () => {
-  const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [inputError, setInputError] = useState(false);
 
-  const changeUsernameHandler = (value: string): void => {
-    setLoginData((prevLoginData) => ({ ...prevLoginData, username: value }));
+  const changeEmailHandler = (value: string): void => {
+    setLoginData((prevLoginData) => ({ ...prevLoginData, email: value }));
   };
 
   const changePasswordHandler = (value: string): void => {
@@ -18,10 +22,14 @@ const Login: React.FC = () => {
   };
 
   const submitLoginHandler = (): void => {
-    console.log(loginData);
-    if (loginData.username === '123' && loginData.password === '123')
-      return alert('Successfully loged.');
-    setInputError(true);
+    axios.post(backend_url + '/authenticate', loginData).then((response) => {
+      if (response.status === 200) {
+        localStorage.setItem('token', response.data.accessToken);
+        authService.getRoleFromJwt();
+        return alert('Welcome.');
+      }
+      setInputError(true);
+    });
   };
 
   return (
@@ -36,12 +44,12 @@ const Login: React.FC = () => {
         <h1>Login</h1>
         <div className={classes['c-login__form']}>
           <Input
-            id="username"
-            name="username"
-            placeholder="username..."
+            id="email"
+            name="email"
+            placeholder="email..."
             type="text"
-            label="Username"
-            setValue={changeUsernameHandler}
+            label="Email"
+            setValue={changeEmailHandler}
           />
           <Input
             id="password"
