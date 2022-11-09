@@ -6,16 +6,18 @@ interface InputProps {
   placeholder: string;
   id: string;
   name: string;
-  label: string;
+  label?: string;
   setValue: (value: string) => void;
 }
 
 const Input: React.FC<InputProps> = ({ type, placeholder, id, name, label, setValue }) => {
   return (
     <div className={classes['c-input']}>
-      <label className={classes['c-input__label']} htmlFor={id}>
-        {label}
-      </label>
+      {label ? (
+        <label className={classes['c-input__label']} htmlFor={id}>
+          {label}
+        </label>
+      ) : null}
       <input
         className={classes['c-input__input-field']}
         type={type}
