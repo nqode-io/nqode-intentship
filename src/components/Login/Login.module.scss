@@ -1,0 +1,38 @@
+@import 'variables.scss';
+
+.c-login {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    padding: $space-xs $space-s;
+    margin: auto;
+
+    max-width: fit-content;
+    max-height: fit-content;
+
+    background: $color-gray;
+    color: $color-black;
+
+    border-radius: $space-s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__input-label {
+    padding: $space-xs $space-s;
+    margin: $space-s;
+
+    font-size: $fs-base;
+  }
+
+  &__button-container {
+    padding: $space-xs $space-s;
+  }
+}
