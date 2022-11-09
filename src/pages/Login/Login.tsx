@@ -4,7 +4,7 @@ import Input from 'components/core/Input/Input';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import authService from 'services/auth-service';
+import AuthService from 'services/AuthService';
 import classes from './Login.module.scss';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     axios.post(backend_url + '/authenticate', loginData).then((response) => {
       if (response.status === 200) {
         localStorage.setItem('token', response.data.accessToken);
-        authService.getRoleFromJwt();
+        AuthService.getRoleFromJwt();
         return alert('Welcome.');
       }
       setInputError(true);
