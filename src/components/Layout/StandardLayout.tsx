@@ -1,21 +1,19 @@
-import React from 'react'
-import Footer from './Footer/Footer'
-import Header from './Header/Header'
+import React from 'react';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
-// interface IStandardLayoutProps {
-//   name: string;
-// }
-
-const StandardLayout = (/*{ name }: IStandardLayoutProps*/ props: any) => {
-  return (
-    <>
-      <Header/>
-      <div>
-        {props.children}
-      </div>
-      <Footer/>
-    </>
-  )
+interface StandardLayoutProps {
+  children: JSX.Element;
 }
 
-export default StandardLayout
+const StandardLayout: React.FC<StandardLayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      <div>{children}</div>
+      <Footer />
+    </>
+  );
+};
+
+export default StandardLayout;

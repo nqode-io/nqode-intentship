@@ -1,0 +1,33 @@
+import React from 'react';
+import classes from './Input.module.scss';
+
+interface InputProps {
+  type: string;
+  placeholder: string;
+  id: string;
+  name: string;
+  label?: string;
+  setValue: (value: string) => void;
+}
+
+const Input: React.FC<InputProps> = ({ type, placeholder, id, name, label, setValue }) => {
+  return (
+    <div className={classes['c-input']}>
+      {label ? (
+        <label className={classes['c-input__label']} htmlFor={id}>
+          {label}
+        </label>
+      ) : null}
+      <input
+        className={classes['c-input__input-field']}
+        type={type}
+        placeholder={placeholder}
+        id={id}
+        name={name}
+        onChange={(event) => setValue(event.target.value)}
+      />
+    </div>
+  );
+};
+
+export default Input;

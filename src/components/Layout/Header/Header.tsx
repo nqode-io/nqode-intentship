@@ -1,12 +1,10 @@
-import React from 'react'
-import classes from './Header.module.scss'
+import React from 'react';
+import classes from './Header.module.scss';
 
 const Header = () => {
   return (
     <header className={classes['c-header']}>
-      <div className={classes['c-header__logo']}>
-        nQode
-      </div>
+      <div className={classes['c-header__logo']}>nQode</div>
       <nav className={classes['c-header__nav']}>
         <ul className={classes['c-header__nav-links']}>
           <li className={classes['c-header__nav-link']}>Home</li>
@@ -17,7 +15,7 @@ const Header = () => {
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
