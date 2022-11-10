@@ -9,6 +9,8 @@
   color: $color-white;
   background-color: $color-blue;
 
+  margin-right: $space-s;
+
   font-size: $fs-medium;
 
   &:hover {
@@ -17,5 +19,33 @@
     border-color: $color-blue;
     color: $color-blue;
     background-color: $color-white;
+  }
+
+  &--secondary {
+    border-color: $color-gray;
+    color: $color-white;
+    background-color: $color-gray;
+
+    &:hover {
+      cursor: pointer;
+
+      border-color: $color-gray;
+      color: $color-gray;
+      background-color: $color-white;
+    }
+  }
+
+  &--danger {
+    border-color: $color-red;
+    color: $color-white;
+    background-color: $color-red;
+
+    &:hover {
+      cursor: pointer;
+
+      border-color: $color-red;
+      color: $color-red;
+      background-color: $color-white;
+    }
   }
 }
