@@ -17,17 +17,10 @@ const BooksList = () => {
     retriveBooks();
   }, []);
 
-  const config = {
-    headers: {
-      Authorization:
-        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsaWJyYXJ5LmlvIiwiYXVkIjoibGlicmFyeSIsImlzcyI6ImlvLmxpYnJhcnkuYXBwIiwiZXhwIjoxNjY4MDc2ODU1LCJ1c2VySWQiOjEwMDAsImVtYWlsIjoiYWRtaW5AbnFvZGUuaW8iLCJ1c2VyUm9sZSI6IkFETUlOSVNUUkFUT1IifQ.Xc9L0XHSZIVlyuLpSA4qDYELgW8HW178dwylfKJ92h85gseFvmSWwpm9CpQ5hNNwJTgd1wk3grG3JBFSGHgZCA'
-    }
-  };
-
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, config);
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`);
     setBooks(response.data.content);
   };
 

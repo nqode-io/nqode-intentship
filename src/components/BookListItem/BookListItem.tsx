@@ -11,7 +11,7 @@ interface BookProps {
   };
 }
 
-export default function BookListItem({ item }: BookProps) {
+const BookListItem = ({ item }: BookProps) => {
   return (
     <div className={classes['c-book-list-item']}>
       <div className={classes['c-book-list-item__image-container']}>
@@ -25,4 +25,6 @@ export default function BookListItem({ item }: BookProps) {
       </div>
     </div>
   );
-}
+};
+
+export default BookListItem;
