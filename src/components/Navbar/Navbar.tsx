@@ -9,10 +9,10 @@ const Navbar = () => {
         <Link to={`/booksoverview`} className={classes['c-navbar__link']}>
           Books Overview
         </Link>
-        <Link to={''} className={classes['c-navbar__link']}>
+        <Link to="" className={classes['c-navbar__link']}>
           Profile
         </Link>
-        <Link to={''} className={classes['c-navbar__link']}>
+        <Link to="" className={classes['c-navbar__link']}>
           Dashboard
         </Link>
       </div>

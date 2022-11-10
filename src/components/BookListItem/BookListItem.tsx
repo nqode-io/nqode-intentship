@@ -11,20 +11,18 @@ interface BookProps {
   };
 }
 
-const BookListItem: React.FC<BookProps> = ({ item }) => {
+export default function BookListItem({ item }: BookProps) {
   return (
     <div className={classes['c-book-list-item']}>
       <div className={classes['c-book-list-item__image-container']}>
         <img alt="" src={image} className={classes['c-book-list-item__image']}></img>
       </div>
       <div className={classes['c-book-list-item__info-container']}>
-        <Link to={'/book'} className={classes['c-book-list-item__link']}>
+        <Link to="/book" className={classes['c-book-list-item__link']}>
           {item.title}
         </Link>
         {item.author}
       </div>
     </div>
   );
-};
-
-export default BookListItem;
+}

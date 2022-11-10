@@ -19,7 +19,6 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    //login logic
     navigate('/booksoverview');
   };
 

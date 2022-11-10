@@ -1,7 +1,6 @@
 import BookListItem from 'components/BookListItem/BookListItem';
 import React, { useEffect, useState } from 'react';
 import classes from './BooksList.module.scss';
-import data from 'data/books.json';
 import axios from 'axios';
 
 interface BooksListData {
@@ -21,22 +20,16 @@ const BooksList = () => {
   const config = {
     headers: {
       Authorization:
-        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsaWJyYXJ5LmlvIiwiYXVkIjoibGlicmFyeSIsImlzcyI6ImlvLmxpYnJhcnkuYXBwIiwiZXhwIjoxNjY4MDAyNDMxLCJ1c2VySWQiOjEwMDAsImVtYWlsIjoiYWRtaW5AbnFvZGUuaW8iLCJ1c2VyUm9sZSI6IkFETUlOSVNUUkFUT1IifQ.XbaKJrfBP2SH3jQ7jdyDUPMw3su1HFSSo3E9zc-iYbM-er44Tva1I3WTaQURaTBFz8od4SaI6ZgjcfbqQMW7aA'
+        'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJsaWJyYXJ5LmlvIiwiYXVkIjoibGlicmFyeSIsImlzcyI6ImlvLmxpYnJhcnkuYXBwIiwiZXhwIjoxNjY4MDc2ODU1LCJ1c2VySWQiOjEwMDAsImVtYWlsIjoiYWRtaW5AbnFvZGUuaW8iLCJ1c2VyUm9sZSI6IkFETUlOSVNUUkFUT1IifQ.Xc9L0XHSZIVlyuLpSA4qDYELgW8HW178dwylfKJ92h85gseFvmSWwpm9CpQ5hNNwJTgd1wk3grG3JBFSGHgZCA'
     }
   };
 
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/book`, config);
-      setBooks(response.data.content);
-    } catch {}
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, config);
+    setBooks(response.data.content);
   };
-
-  // const getBooks = () => {
-  //   setBooks(data);
-  // };
 
   return (
     <div className={classes['c-books-list']}>

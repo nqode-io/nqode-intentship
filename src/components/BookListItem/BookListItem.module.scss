@@ -11,7 +11,7 @@
   justify-content: center;
   flex-direction: column;
 
-  background-color: $color-lightgreen;
+  background-color: $color-gray;
 
   border-radius: $space-s;
 
@@ -26,11 +26,17 @@
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   &__link {
     margin: $space-s;
     color: $color-black;
     text-decoration: none;
+  }
+
+  &:hover {
+    background-color: $color-darkgray;
   }
 }
