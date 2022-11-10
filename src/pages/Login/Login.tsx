@@ -24,7 +24,7 @@ const Login: React.FC = () => {
 
   const submitLoginHandler = (): void => {
     axios
-      .post(backend_url + '/authenticate', loginData)
+      .post(`${backend_url}/authenticate`, loginData)
       .then((response) => {
         if (response.status === 200) {
           localStorage.setItem('token', response.data.accessToken);
