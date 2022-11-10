@@ -12,29 +12,22 @@ interface TokenData {
 
 const getDecodedJwt = (): TokenData | null => {
   const token: string | null = localStorage.getItem('token');
-
-  if (token == null) return null;
-
-  return jwtDecode(token);
+  return token ? jwtDecode(token) : null;
 };
 
-const getRoleFromJwt = (): string | null => {
+const getRoleFromJwt = (): string => {
   const decodedJwt = getDecodedJwt();
-
-  if (decodedJwt == null) return null;
-
-  return decodedJwt.userRole;
+  return decodedJwt ? decodedJwt.userRole : '';
 };
 
-const isAdministrator = (): boolean | null => {
-  if (getRoleFromJwt() === 'ADMINISTRATOR') return true;
-  return false;
+const isAdministrator = (): boolean => {
+  return getRoleFromJwt() === 'ADMINISTRATOR';
 };
 
-const AuthService = {
+const authService = {
   getDecodedJwt,
   getRoleFromJwt,
   isAdministrator
 };
 
-export default AuthService;
+export default authService;

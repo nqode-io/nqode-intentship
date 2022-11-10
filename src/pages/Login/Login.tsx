@@ -1,17 +1,18 @@
+import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import Input from 'components/core/Input/Input';
-import React from 'react';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AuthService from 'services/AuthService';
 import classes from './Login.module.scss';
+import authService from 'services/authService';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [inputError, setInputError] = useState(false);
+
+  const { getRoleFromJwt } = authService;
 
   const changeEmailHandler = (value: string): void => {
     setLoginData((prevLoginData) => ({ ...prevLoginData, email: value }));
@@ -22,14 +23,15 @@ const Login: React.FC = () => {
   };
 
   const submitLoginHandler = (): void => {
-    axios.post(backend_url + '/authenticate', loginData).then((response) => {
-      if (response.status === 200) {
-        localStorage.setItem('token', response.data.accessToken);
-        AuthService.getRoleFromJwt();
-        return alert('Welcome.');
-      }
-      setInputError(true);
-    });
+    axios
+      .post(backend_url + '/authenticate', loginData)
+      .then((response) => {
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.accessToken);
+          console.log('Welcome.');
+        }
+      })
+      .catch((err) => setInputError(true));
   };
 
   return (
