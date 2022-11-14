@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import classes from './Book.module.scss';
+import classes from 'Book.module.scss';
 import image from 'img/book1.png';
 import Button from 'components/core/Button/Button';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import BookModel from 'models/BookModel';
 import axios from 'axios';
 

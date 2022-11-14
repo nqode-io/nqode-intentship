@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import classes from './Login.module.scss';
-import Input from '../../components/core/Input/Input';
-import Button from '../../components/core/Button/Button';
+import classes from 'Login.module.scss';
+import Input from 'components/core/Input/Input';
+import Button from 'components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
@@ -11,16 +11,6 @@ interface CredentialsForm {
   username: string;
   password: string;
 }
-
-// interface TokenData {
-//   aud: string,
-//     email: string,
-//   exp: number,
-//   iss: string,
-//   sub: string,
-//   userId: number,
-//   userRole: string
-// }
 
 const Login = () => {
   const [credentials, setCredentials] = useState<CredentialsForm>({

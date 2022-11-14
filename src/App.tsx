@@ -1,7 +1,7 @@
-import Login from './pages/Login/Login';
 import React from 'react';
-import classes from './App.module.scss';
+import classes from 'App.module.scss';
 import { Route, Routes } from 'react-router-dom';
+import Login from 'pages/Login/Login';
 import BooksOverview from 'pages/BooksOverview/BooksOverview';
 import SingleBook from 'pages/SingleBook/SingleBook';
 import Navbar from 'components/Navbar/Navbar';

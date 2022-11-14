@@ -1,6 +1,6 @@
 import BookListItem from 'components/BookListItem/BookListItem';
 import React, { useEffect, useState } from 'react';
-import classes from './BooksList.module.scss';
+import classes from 'BooksList.module.scss';
 import axios from 'axios';
 
 interface BooksListData {
