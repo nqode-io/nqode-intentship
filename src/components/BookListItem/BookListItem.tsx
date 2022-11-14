@@ -18,8 +18,8 @@ const BookListItem = ({ item }: BookProps) => {
         <img alt="" src={image} className={classes['c-book-list-item__image']}></img>
       </div>
       <div className={classes['c-book-list-item__info-container']}>
-        <Link to="/book" className={classes['c-book-list-item__link']}>
-          {item.title}
+        <Link to={`/book/${item.id}`} className={classes['c-book-list-item__link']}>
+          <strong>{item.title}</strong>
         </Link>
         {item.author}
       </div>

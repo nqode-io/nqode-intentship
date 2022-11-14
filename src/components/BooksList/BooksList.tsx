@@ -13,16 +13,25 @@ interface BooksListData {
 }
 
 const BooksList = () => {
-  useEffect(() => {
-    retriveBooks();
-  }, []);
-
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`);
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: {
+        page: 0,
+        size: 8,
+        sort: 'asc'
+      }
+    });
     setBooks(response.data.content);
   };
+
+  useEffect(() => {
+    retriveBooks();
+  }, []);
 
   return (
     <div className={classes['c-books-list']}>

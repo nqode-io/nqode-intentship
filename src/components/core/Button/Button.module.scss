@@ -4,8 +4,11 @@
   padding: $space-xs $space-s;
   margin: $space-xs;
 
-  background: transparent;
+  width: 12rem;
+
+  background-color: $color-green;
   font-size: $fs-medium;
-  border: none;
+  border-radius: $space-s;
+  border-width: 1px;
   cursor: pointer;
 }
