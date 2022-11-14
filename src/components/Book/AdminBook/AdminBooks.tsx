@@ -7,14 +7,6 @@ const AdminBooks = () => {
   return (
     <div className={classes['c-admin-books']}>
       <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
     </div>
   );
 };
