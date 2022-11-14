@@ -59,4 +59,11 @@
     padding: $space-xs $space-s;
     margin: $space-xs;
   }
+
+  &__modify-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

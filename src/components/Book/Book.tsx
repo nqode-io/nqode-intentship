@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 import classes from './Book.module.scss';
 import image from 'img/book1.png';
 import Button from 'components/core/Button/Button';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import BookModel from 'models/BookModel';
 import axios from 'axios';
+import BookDialog from 'components/BookDialog/BookDialog';
 
 const Book = () => {
-  const [book, setBook] = useState<BookModel | undefined>({} as BookModel);
+  const [book, setBook] = useState<BookModel>({} as BookModel);
+  const [modify, setModify] = useState<Boolean>(false);
   const location = useLocation();
   const id = parseInt(location.pathname.split('/')[2]);
+  const navigate = useNavigate();
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -18,6 +21,16 @@ const Book = () => {
       }
     });
     setBook(response.data);
+  };
+
+  const deleteBook = async () => {
+    await axios
+      .delete(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(() => navigate('/booksoverview'));
   };
 
   useEffect(() => {
@@ -29,23 +42,37 @@ const Book = () => {
       <div className={classes['c-book__image-container']}>
         <img className={classes['c-book__image']} alt="" src={image}></img>
       </div>
-      <div className={classes['c-book__side-content']}>
-        <div className={classes['c-book__info-container']}>
-          <strong className={classes['c-book__title']}>{book?.title}</strong>
-          <span className={classes['c-book__author']}>{book?.author}</span>
-          <span className={classes['c-book__description']}>{book?.description}</span>
-          <span className={classes['c-book__num-of-copies']}>
-            Number of Copies: {book?.numOfCopies}
-          </span>
-        </div>
-        <div className={classes['c-book__tools']}>
-          <div>
-            <Button content="Modify" />
-            <Button content="Delete" />
+      {!modify ? (
+        <div className={classes['c-book__side-content']}>
+          <div className={classes['c-book__info-container']}>
+            <strong className={classes['c-book__title']}>{book.title}</strong>
+            <span className={classes['c-book__author']}>{book.author}</span>
+            <span className={classes['c-book__description']}>{book.description}</span>
+            <span className={classes['c-book__num-of-copies']}>
+              Number of Copies: {book.numOfCopies}
+            </span>
           </div>
-          <Button content="Rent" />
+          <div className={classes['c-book__tools']}>
+            <div>
+              <Button content="Modify" onClick={() => setModify(true)} />
+              <Button content="Delete" onClick={() => deleteBook()} />
+            </div>
+            <Button content="Rent" />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={classes['c-book__modify-container']}>
+          <BookDialog
+            id={book.id}
+            title={book.title}
+            author={book.author}
+            description={book.description}
+            imagePath={book.imagePath}
+            numOfCopies={book.numOfCopies}
+          />
+          <Button content="Cancel" onClick={() => setModify(false)} />
+        </div>
+      )}
     </div>
   );
 };
