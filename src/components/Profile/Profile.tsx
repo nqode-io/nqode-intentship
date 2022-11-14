@@ -1,23 +1,58 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import RentedBookCopy from 'model/RentedBookCopy';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import authService from 'services/authService';
 import classes from './Profile.module.scss';
+import UserAbout from './UserAbout';
+
+interface User {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  phoneNumber: string;
+}
+
+const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Profile: React.FC = () => {
+  const [user, setUser] = useState<User>({} as User);
+  const [currentlyRented, setCurrentlyRented] = useState<RentedBookCopy[]>([]);
+
+  const userId = authService.getIdFromJwt();
+
+  const getUser = () => {
+    axios
+      .get(`${backend_url}/user/${userId}`)
+      .then((res) => {
+        console.log(res.data);
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getCurrentlyRentedBooks = () => {
+    axios.get(`${backend_url}/rent/user/${userId}`).then();
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <div className={classes['c-user-profile']}>
-      <div className={classes['c-user-profile__about']}>
-        <h1 className={classes['c-user-profile__title']}>User info</h1>
-        <div>Aleksa Alfirovic</div>
-        <div>
-          <FontAwesomeIcon icon={faEnvelope} /> aleksa@gmail.com
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faPhone} /> 065555000
-        </div>
-        <div>
-          <FontAwesomeIcon icon={faLocationDot} /> Adresa
-        </div>
+      <UserAbout
+        firstName={user.firstName}
+        lastName={user.lastName}
+        email={user.email}
+        address={user.address}
+        phoneNumber={user.phoneNumber}
+      />
+      <hr />
+      <div>
+        <h1>Currently renting</h1>
       </div>
     </div>
   );

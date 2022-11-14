@@ -6,7 +6,7 @@ interface TokenData {
   exp: number;
   iss: string;
   sub: string;
-  userId: number;
+  userId: string;
   userRole: string;
 }
 
@@ -20,6 +20,11 @@ const getRoleFromJwt = (): string => {
   return decodedJwt ? decodedJwt.userRole : '';
 };
 
+const getIdFromJwt = (): string => {
+  const decodedJwt = getDecodedJwt();
+  return decodedJwt ? decodedJwt.userId : '';
+};
+
 const isAdministrator = (): boolean => {
   return getRoleFromJwt() === 'ADMINISTRATOR';
 };
@@ -27,6 +32,7 @@ const isAdministrator = (): boolean => {
 const authService = {
   getDecodedJwt,
   getRoleFromJwt,
+  getIdFromJwt,
   isAdministrator
 };
 
