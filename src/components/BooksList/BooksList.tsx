@@ -20,8 +20,18 @@ const BooksList = () => {
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`);
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params: {
+        page: 0,
+        size: 8,
+        sort: 'asc'
+      }
+    });
     setBooks(response.data.content);
+    console.log(books);
   };
 
   return (

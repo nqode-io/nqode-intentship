@@ -4,14 +4,14 @@
   padding: $space-xs $space-s;
   margin: $space-xs;
 
-  width: fit-content;
+  width: 13.5rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 
-  background-color: $color-gray;
+  background-color: $color-lightgray;
 
   border-radius: $space-s;
 
@@ -37,6 +37,6 @@
   }
 
   &:hover {
-    background-color: $color-darkgray;
+    background-color: $color-gray;
   }
 }
