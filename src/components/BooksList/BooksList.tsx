@@ -31,7 +31,6 @@ const BooksList = () => {
       }
     });
     setBooks(response.data.content);
-    console.log(books);
   };
 
   return (
