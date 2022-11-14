@@ -11,8 +11,8 @@ const CreateBook: React.FC = () => {
   const navigate = useNavigate();
   const { createBook } = bookService;
 
-  const changeHandler = (value: string, prop: string): void => {
-    setBook((prevBook) => ({ ...prevBook, [prop]: value }));
+  const changeHandler = (value: string, prop?: string): void => {
+    setBook((prevBook) => ({ ...prevBook, [prop!]: value }));
   };
 
   const changeImageHandler = (file: File): void => {
@@ -40,7 +40,7 @@ const CreateBook: React.FC = () => {
         placeholder="title..."
         type="text"
         label="Title"
-        setValue={() => changeHandler}
+        setValue={changeHandler}
       />
       <Input
         id="author"
@@ -48,7 +48,7 @@ const CreateBook: React.FC = () => {
         placeholder="author..."
         type="text"
         label="Author"
-        setValue={() => changeHandler}
+        setValue={changeHandler}
       />
       <Input
         id="description"
@@ -56,7 +56,7 @@ const CreateBook: React.FC = () => {
         placeholder="description..."
         type="text"
         label="Description"
-        setValue={() => changeHandler}
+        setValue={changeHandler}
       />
       <div className={classes['c-create-book-form__file_input']}>
         <label htmlFor="image">Image</label>
