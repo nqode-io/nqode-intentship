@@ -8,8 +8,8 @@ interface InputProps {
   name: string;
   label?: string;
   value?: string | number;
-  setValue: (value: string) => void;
   readonly?: boolean;
+  setValue?: (value: string, prop?: string) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -37,7 +37,7 @@ const Input: React.FC<InputProps> = ({
         name={name}
         value={value}
         readOnly={readonly}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => setValue!(event.target.value, name)}
       />
     </div>
   );

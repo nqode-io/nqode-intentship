@@ -1,0 +1,21 @@
+@import 'variables.scss';
+
+.c-create-book-form {
+  width: 40%;
+  margin: 0 auto;
+
+  &__page_title {
+    text-align: center;
+    margin-top: $space-l;
+  }
+
+  &__page_button {
+    text-align: center;
+  }
+
+  &__file_input {
+    display: flex;
+    flex-direction: column;
+    font-size: $fs-large;
+  }
+}

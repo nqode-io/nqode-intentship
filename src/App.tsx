@@ -1,6 +1,7 @@
 import React from 'react';
-import AdminBooksPage from 'pages/AdminBooksPage';
+import CreateBookPage from 'pages/CreateBookPage';
 import Login from 'pages/Login/Login';
+import AdminBooksPage from 'pages/AdminBooksPage';
 import ProfilePage from 'pages/ProfilePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserBookPage from 'pages/User/UserBookPage';
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/book/:id" element={<UserBookPage />} />
         <Route path="/book/edit/:id" element={<BookDetailsPage />} />
+        <Route path="/create-book" element={<CreateBookPage />} />
       </Routes>
     </BrowserRouter>
   );
