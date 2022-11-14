@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import classes from 'Book.module.scss';
+import classes from './Book.module.scss';
 import image from 'img/book1.png';
 import Button from 'components/core/Button/Button';
 import { useLocation } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from 'BookListItem.module.scss';
+import classes from './BookListItem.module.scss';
 import image from 'img/book1.png';
 import { Link } from 'react-router-dom';
 

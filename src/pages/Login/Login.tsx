@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import classes from 'Login.module.scss';
+import classes from './Login.module.scss';
 import Input from 'components/core/Input/Input';
 import Button from 'components/core/Button/Button';
 import axios from 'axios';
