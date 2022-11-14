@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import classes from './Login.module.scss';
-import Input from '../core/Input/Input';
-import Button from '../core/Button/Button';
+import Input from '../../components/core/Input/Input';
+import Button from '../../components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
