@@ -11,10 +11,6 @@ const Book = () => {
   const location = useLocation();
   const id = parseInt(location.pathname.split('/')[2]);
 
-  useEffect(() => {
-    retriveBook();
-  }, []);
-
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
       headers: {
@@ -23,6 +19,10 @@ const Book = () => {
     });
     setBook(response.data);
   };
+
+  useEffect(() => {
+    retriveBook();
+  }, []);
 
   return (
     <div className={classes['c-book']}>
@@ -40,10 +40,10 @@ const Book = () => {
         </div>
         <div className={classes['c-book__tools']}>
           <div>
-            <Button content="Modify" onClick={() => {}} />
-            <Button content="Delete" onClick={() => {}} />
+            <Button content="Modify" />
+            <Button content="Delete" />
           </div>
-          <Button content="Rent" onClick={() => {}} />
+          <Button content="Rent" />
         </div>
       </div>
     </div>

@@ -13,10 +13,6 @@ interface BooksListData {
 }
 
 const BooksList = () => {
-  useEffect(() => {
-    retriveBooks();
-  }, []);
-
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
@@ -32,6 +28,10 @@ const BooksList = () => {
     });
     setBooks(response.data.content);
   };
+
+  useEffect(() => {
+    retriveBooks();
+  }, []);
 
   return (
     <div className={classes['c-books-list']}>

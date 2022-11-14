@@ -22,7 +22,6 @@ const Login = () => {
 
   const getRole = (token: string) => {
     var decoded = jwt_decode(token);
-    console.log(decoded);
   };
 
   const handleToken = (token: string) => {
