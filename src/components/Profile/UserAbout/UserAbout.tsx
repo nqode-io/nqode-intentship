@@ -20,7 +20,7 @@ const UserAbout: React.FC<UserAboutProps> = ({
 }) => {
   return (
     <div className={classes['c-user-profile-about']}>
-      <h1 className={classes['c-user-profile-about__title']}>User info</h1>
+      <h1 className={classes['c-user-profile-about__title']}>Welcome to your profile</h1>
       <div className={classes['c-user-profile-about__one-info']}>
         {firstName} {lastName}
       </div>

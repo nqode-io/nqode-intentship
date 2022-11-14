@@ -3,8 +3,10 @@ import RentedBookCopy from 'model/RentedBookCopy';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import authService from 'services/authService';
+import CurrentlyRentedBooks from './CurrentlyRentedBooks/CurrentlyRentedBooks';
 import classes from './Profile.module.scss';
-import UserAbout from './UserAbout';
+import RentHistory from './RentHistory/RentHistory';
+import UserAbout from './UserAbout/UserAbout';
 
 interface User {
   id: number;
@@ -20,6 +22,7 @@ const backend_url = process.env.REACT_APP_BACKEND_URL;
 const Profile: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [currentlyRented, setCurrentlyRented] = useState<RentedBookCopy[]>([]);
+  const [rentHistory, setRentHistory] = useState<RentedBookCopy[]>([]);
 
   const userId = authService.getIdFromJwt();
 
@@ -27,18 +30,27 @@ const Profile: React.FC = () => {
     axios
       .get(`${backend_url}/user/${userId}`)
       .then((res) => {
-        console.log(res.data);
         setUser(res.data);
       })
       .catch((err) => console.log(err));
   };
 
   const getCurrentlyRentedBooks = () => {
-    axios.get(`${backend_url}/rent/user/${userId}`).then();
+    axios.get(`${backend_url}/rent/user/${userId}?current=true`).then((res) => {
+      setCurrentlyRented(res.data.content);
+    });
+  };
+
+  const getRentHistory = () => {
+    axios.get(`${backend_url}/rent/user/${userId}?current=false`).then((res) => {
+      setRentHistory(res.data.content);
+    });
   };
 
   useEffect(() => {
     getUser();
+    getCurrentlyRentedBooks();
+    getRentHistory();
   }, []);
 
   return (
@@ -51,9 +63,9 @@ const Profile: React.FC = () => {
         phoneNumber={user.phoneNumber}
       />
       <hr />
-      <div>
-        <h1>Currently renting</h1>
-      </div>
+      <CurrentlyRentedBooks currentlyRentedBooks={currentlyRented} />
+      <hr />
+      <RentHistory rentHistory={rentHistory} />
     </div>
   );
 };
