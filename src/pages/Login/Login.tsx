@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import Input from 'components/core/Input/Input';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import classes from './Login.module.scss';
-import authService from 'services/authService';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
   const [inputError, setInputError] = useState(false);
-
-  const { getRoleFromJwt } = authService;
+  const navigate = useNavigate();
 
   const changeEmailHandler = (value: string): void => {
     setLoginData((prevLoginData) => ({ ...prevLoginData, email: value }));
@@ -28,6 +26,7 @@ const Login: React.FC = () => {
       .then((response) => {
         if (response.status === 200) {
           localStorage.setItem('token', response.data.accessToken);
+          navigate('/profile');
           console.log('Welcome.');
         }
       })

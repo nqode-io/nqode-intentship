@@ -1,0 +1,17 @@
+@import 'variables.scss';
+
+.c-rented-book-card {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: $space-l;
+  padding: $space-l;
+
+  border-radius: 8px;
+
+  background-color: $color-blue;
+
+  &--secondary {
+    background-color: gray;
+  }
+}

@@ -1,10 +1,8 @@
+import React from 'react';
 import AdminBooksPage from 'pages/Admin/AdminBooksPage';
 import Login from 'pages/Login/Login';
-
-import React from 'react';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
-import classes from './App.module.scss';
-import StandardLayout from './components/Layout/StandardLayout';
+import ProfilePage from 'pages/ProfilePage';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -12,6 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/admin-books" element={<AdminBooksPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
