@@ -16,6 +16,7 @@ const RentHistory: React.FC<RentHistoryProps> = ({ rentHistory }) => {
           rentHistory.map((book, i) => {
             return (
               <RentedBookCard
+                key={i}
                 history={true}
                 id={book.id}
                 userId={book.userId}

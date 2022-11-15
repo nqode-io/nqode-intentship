@@ -16,6 +16,7 @@ const CurrentlyRentedBooks: React.FC<CurrentlyRentedBooksProps> = ({ currentlyRe
           currentlyRentedBooks.map((book, i) => {
             return (
               <RentedBookCard
+                key={i}
                 id={book.id}
                 userId={book.userId}
                 bookCopyId={book.bookCopyId}
