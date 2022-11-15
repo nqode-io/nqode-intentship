@@ -12,9 +12,7 @@ const CurrentlyRentedBooks: React.FC<CurrentlyRentedBooksProps> = ({ currentlyRe
     <div className={classes['c-rented-books']}>
       <h1 className={classes['c-rented-books__title']}>Currently rented books</h1>
       <div className={classes['c-rented-books__books']}>
-        {currentlyRentedBooks.length == 0 ? (
-          <div>You don't have any rented books!</div>
-        ) : (
+        {currentlyRentedBooks.length ? (
           currentlyRentedBooks.map((book, i) => {
             return (
               <RentedBookCard
@@ -27,6 +25,8 @@ const CurrentlyRentedBooks: React.FC<CurrentlyRentedBooksProps> = ({ currentlyRe
               />
             );
           })
+        ) : (
+          <div>You don't have any rented books!</div>
         )}
       </div>
     </div>
