@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import BookCard from '../BookCard/BookCard';
-import classes from './AdminBooks.module.scss';
+import BookCard from './BookCard/BookCard';
+import classes from './Books.module.scss';
 import Book from 'model/Book';
 
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
-const AdminBooks: React.FC = () => {
+const Books: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const getBooks = (): void => {
@@ -46,4 +46,4 @@ const AdminBooks: React.FC = () => {
   );
 };
 
-export default AdminBooks;
+export default Books;
