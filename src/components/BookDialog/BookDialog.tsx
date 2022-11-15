@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Button from 'components/core/Button/Button';
-import Input from 'components/core/Input/Input';
+import InputContainer from 'components/core/InputContainer/InputContainer';
 import BookModel from 'models/BookModel';
 import React, { useState } from 'react';
 import classes from './BookDialog.module.scss';
@@ -23,22 +23,10 @@ const BookDialog = (oldBook: BookModel) => {
   return (
     <div className={classes['c-book-dialog']}>
       <div className={classes['c-book-dialog__container']}>
-        <div className={classes['c-book-dialog__input-container']}>
-          <label className={classes['c-book-dialog__input-label']}>Titile</label>
-          <Input name="title" onChange={handleChange} value={book.title}></Input>
-        </div>
-        <div className={classes['c-book-dialog__input-container']}>
-          <label className={classes['c-book-dialog__input-label']}>Author</label>
-          <Input name="author" onChange={handleChange} value={book.author}></Input>
-        </div>
-        <div className={classes['c-book-dialog__input-container']}>
-          <label className={classes['c-book-dialog__input-label']}>Description</label>
-          <Input name="description" onChange={handleChange} value={book.description}></Input>
-        </div>
-        <div className={classes['c-book-dialog__input-container']}>
-          <label className={classes['c-book-dialog__input-label']}>Number of copies</label>
-          <Input name="num-of-copies" onChange={handleChange} value={book.numOfCopies}></Input>
-        </div>
+        <InputContainer onChange={handleChange} value={book.title} label="Title" />
+        <InputContainer onChange={handleChange} value={book.author} label="Author" />
+        <InputContainer onChange={handleChange} value={book.description} label="Description" />
+        <InputContainer onChange={handleChange} value={book.numOfCopies} label="Number of Copies" />
       </div>
       <div className={classes['c-book-dialog__button-container']}>
         <Button content={'Submit'} onClick={updateBook} />

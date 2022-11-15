@@ -5,7 +5,7 @@ const Dashboard = () => {
   return (
     <div>
       Rented books:
-      <BooksList filter="rented-current" />
+      <BooksList componentType="rented" />
     </div>
   );
 };

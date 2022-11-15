@@ -6,7 +6,7 @@ const BooksOverview = () => {
   return (
     <div>
       <div className={classes['c-books-overview']}>
-        <BooksList filter="all" />
+        <BooksList />
       </div>
     </div>
   );

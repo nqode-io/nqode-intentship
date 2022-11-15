@@ -12,53 +12,44 @@ interface BooksListData {
   numOfCopies: number;
 }
 
-type BooksListProps = {
-  filter?: string;
-};
+interface BooksListProps {
+  componentType?: 'rented' | 'history';
+}
 
-const BooksList = ({ filter }: BooksListProps) => {
+interface Pagable {
+  current?: boolean;
+  page: number;
+  size: number;
+  sort: 'asc' | 'desc';
+}
+
+const BooksList = ({ componentType }: BooksListProps) => {
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    if (filter === 'rented-current') {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/rent/book`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        params: {
-          current: true,
-          page: 0,
-          size: 8,
-          sort: 'asc'
-        }
-      });
-      setBooks(response.data.content);
-    } else if (filter === 'rented-history') {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/rent/book`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        params: {
-          current: false,
-          page: 0,
-          size: 8,
-          sort: 'asc'
-        }
-      });
-      setBooks(response.data.content);
-    } else {
-      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        },
-        params: {
-          page: 0,
-          size: 8,
-          sort: 'asc'
-        }
-      });
-      setBooks(response.data.content);
+    let url = `${process.env.REACT_APP_BASE_URL}/${componentType ? 'rent/book' : 'book'}`;
+    const params: Pagable = {
+      page: 0,
+      size: 8,
+      sort: 'asc'
+    };
+
+    if (componentType === 'rented') {
+      params.current = true;
     }
+
+    if (componentType === 'history') {
+      params.current = false;
+    }
+
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      params
+    });
+
+    setBooks(response.data.content);
   };
 
   useEffect(() => {
