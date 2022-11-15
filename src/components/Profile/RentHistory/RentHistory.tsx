@@ -12,7 +12,7 @@ const RentHistory: React.FC<RentHistoryProps> = ({ rentHistory }) => {
     <div className={classes['c-rented-books']}>
       <h1 className={classes['c-rented-books__title']}>Rent history</h1>
       <div className={classes['c-rented-books__books']}>
-        {rentHistory.length == 0 ? (
+        {rentHistory.length ? (
           rentHistory.map((book, i) => {
             return (
               <RentedBookCard
