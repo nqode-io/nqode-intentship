@@ -3,20 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axiosConfig from './axios/axiosConfig';
 
-const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers = { Authorization: `Bearer ${token}` };
-  }
-  return config;
-};
+const { requestInterceptor } = axiosConfig;
 
-const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-  return Promise.reject(error);
-};
-
-axios.interceptors.request.use(onRequest, onRequestError);
+requestInterceptor();
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
