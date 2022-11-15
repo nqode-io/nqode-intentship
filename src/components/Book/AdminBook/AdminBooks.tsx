@@ -10,9 +10,17 @@ const AdminBooks: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const getBooks = (): void => {
-    axios.get(`${backend_url}/book?page=0&size=10&sort=id`).then((res) => {
-      setBooks(res.data.content);
-    });
+    axios
+      .get(`${backend_url}/book`, {
+        params: {
+          page: 0,
+          size: 10,
+          sort: 'id'
+        }
+      })
+      .then((res) => {
+        setBooks(res.data.content);
+      });
   };
 
   useEffect(() => {
