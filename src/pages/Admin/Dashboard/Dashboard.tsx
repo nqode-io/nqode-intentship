@@ -4,7 +4,8 @@ import React from 'react';
 const Dashboard = () => {
   return (
     <div>
-      <BooksList />
+      Rented books:
+      <BooksList componentType="rented" />
     </div>
   );
 };

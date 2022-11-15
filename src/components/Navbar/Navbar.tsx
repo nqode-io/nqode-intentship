@@ -12,7 +12,7 @@ const Navbar = () => {
         <Link to="" className={classes['c-navbar__link']}>
           Profile
         </Link>
-        <Link to="" className={classes['c-navbar__link']}>
+        <Link to="/dashboard" className={classes['c-navbar__link']}>
           Dashboard
         </Link>
       </div>

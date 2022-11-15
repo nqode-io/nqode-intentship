@@ -2,14 +2,15 @@ import React from 'react';
 import classes from './Input.module.scss';
 
 interface InputProps {
-  name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string | number;
+  type?: string;
 }
 
-const Input = ({ name, onChange }: InputProps) => {
+const Input = ({ onChange, value, type }: InputProps) => {
   return (
     <div>
-      <input className={classes['c-input']} name={name} onChange={onChange}></input>
+      <input className={classes['c-input']} onChange={onChange} value={value} type={type} />
     </div>
   );
 };

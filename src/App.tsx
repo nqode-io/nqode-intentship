@@ -5,6 +5,7 @@ import Login from 'pages/Login/Login';
 import BooksOverview from 'pages/BooksOverview/BooksOverview';
 import SingleBook from 'pages/SingleBook/SingleBook';
 import Navbar from 'components/Navbar/Navbar';
+import Dashboard from 'pages/Admin/Dashboard/Dashboard';
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<BooksOverview />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/booksoverview" element={<BooksOverview />} />
         <Route path="/book/:id" element={<SingleBook />} />
       </Routes>

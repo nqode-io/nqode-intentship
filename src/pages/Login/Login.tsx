@@ -1,11 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import classes from './Login.module.scss';
-import Input from 'components/core/Input/Input';
 import Button from 'components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
+import InputContainer from 'components/core/InputContainer/InputContainer';
 
 interface CredentialsForm {
   username: string;
@@ -48,16 +48,10 @@ const Login = () => {
   return (
     <div className={classes['c-login']}>
       <div className={classes['c-login__container']}>
-        <div className={classes['c-login__input-container']}>
-          <label className={classes['c-login__input-label']}>Username</label>
-          <Input name="username" onChange={handleChange}></Input>
-        </div>
-        <div className={classes['c-login__input-container']}>
-          <label className={classes['c-login__input-label']}>Password</label>
-          <Input name="password" onChange={handleChange}></Input>
-        </div>
+        <InputContainer onChange={handleChange} label="Username" />
+        <InputContainer onChange={handleChange} label="Password" type="password" />
         <div className={classes['c-login__button-container']}>
-          <Button content="Log in" onClick={handleLogin}></Button>
+          <Button content="Log in" onClick={handleLogin} />
         </div>
       </div>
     </div>

@@ -12,20 +12,43 @@ interface BooksListData {
   numOfCopies: number;
 }
 
-const BooksList = () => {
+interface BooksListProps {
+  componentType?: 'rented' | 'history';
+}
+
+interface Pagable {
+  current?: boolean;
+  page: number;
+  size: number;
+  sort: 'asc' | 'desc';
+}
+
+const BooksList = ({ componentType }: BooksListProps) => {
   const [books, setBooks] = useState<BooksListData[]>([]);
 
   const retriveBooks = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book`, {
+    let url = `${process.env.REACT_APP_BASE_URL}/${componentType ? 'rent/book' : 'book'}`;
+    const params: Pagable = {
+      page: 0,
+      size: 8,
+      sort: 'asc'
+    };
+
+    if (componentType === 'rented') {
+      params.current = true;
+    }
+
+    if (componentType === 'history') {
+      params.current = false;
+    }
+
+    const response = await axios.get(url, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },
-      params: {
-        page: 0,
-        size: 8,
-        sort: 'asc'
-      }
+      params
     });
+
     setBooks(response.data.content);
   };
 
