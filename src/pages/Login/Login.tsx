@@ -22,6 +22,7 @@ const Login: React.FC = () => {
     axios
       .post(`/authenticate`, loginData)
       .then((response) => {
+        console.log("aaaa");
         if (response.status === 200) {
           localStorage.setItem('token', response.data.accessToken);
           navigate('/profile');

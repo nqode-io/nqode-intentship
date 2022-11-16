@@ -24,6 +24,15 @@
 
     color: $color-white;
     background-color: $color-blue;
+
+    &:hover {
+      cursor: pointer;
+
+      border: 2px solid $color-blue;
+
+      color: $color-blue;
+      background-color: $color-white;
+    }
   }
 
   &__all-details {

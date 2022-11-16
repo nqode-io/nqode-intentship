@@ -1,87 +1,97 @@
+import React, { useState } from 'react';
 import Button from 'components/core/Button/Button';
 import Input from 'components/core/Input/Input';
-import React from 'react';
+import UserModel from 'model/UserModel';
 import classes from './User.module.scss';
 
-const User: React.FC = () => {
+interface UserProps {
+  user: UserModel;
+  editUser: (id: string | number, user: UserModel) => void;
+  deleteUser: (id: string | number) => void;
+}
+
+const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
+  const [toggleDetails, setToggleDetails] = useState<boolean>(false);
+  const [userValues, setUserValues] = useState<UserModel>(user);
+
+  const changeUserValueHandler = (value: string, prop?: string) => {
+    setUserValues((prevUserValues) => ({ ...prevUserValues, [prop!]: value }));
+  };
+
   return (
     <div className={classes['c-user']}>
-      <div className={classes['c-user__short-info']}>
-        <div>444</div>
-        <div>username</div>
-        <div>065-544-544</div>
+      <div
+        className={classes['c-user__short-info']}
+        onClick={() => setToggleDetails(!toggleDetails)}
+      >
+        <div>{userValues.id}</div>
+        <div>{userValues.email}</div>
+        <div>{userValues.phoneNumber}</div>
       </div>
-      <div className={classes['c-user__all-details']}>
-        <div className={classes['c-user__input-holder']}>
-          <Input
-            type={'text'}
-            placeholder={'first name'}
-            id={'firstName'}
-            name={'firstName'}
-            setValue={function (value: string): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
-          <Input
-            type={'text'}
-            placeholder={'last name'}
-            id={'lastName'}
-            name={'lastName'}
-            setValue={function (value: string): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
-        </div>
-        <div className={classes['c-user__input-holder']}>
-          <Input
-            type={'text'}
-            placeholder={'email'}
-            id={'email'}
-            name={'email'}
-            setValue={function (value: string): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
-          <Input
-            type={'text'}
-            placeholder={'phone number'}
-            id={'phoneNumber'}
-            name={'phoneNumber'}
-            setValue={function (value: string): void {
-              throw new Error('Function not implemented.');
-            }}
-          />
-        </div>
-        <div className={classes['c-user__input-holder']}>
-          <div className={classes['c-user__last']}>
+      {toggleDetails ? (
+        <div className={classes['c-user__all-details']}>
+          <div className={classes['c-user__input-holder']}>
             <Input
-              type={'address'}
-              placeholder={'address'}
-              id={'address'}
-              name={'address'}
-              setValue={function (value: string): void {
-                throw new Error('Function not implemented.');
-              }}
+              type={'text'}
+              placeholder={'first name'}
+              id={'firstName'}
+              name={'firstName'}
+              inputValue={userValues.firstName}
+              setValue={changeUserValueHandler}
+            />
+            <Input
+              type={'text'}
+              placeholder={'last name'}
+              id={'lastName'}
+              inputValue={userValues.lastName}
+              name={'lastName'}
+              setValue={changeUserValueHandler}
             />
           </div>
-          <div>
-            <Button
-              name={'Edit'}
-              clickHandler={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-              type={'secondary'}
+          <div className={classes['c-user__input-holder']}>
+            <Input
+              type={'text'}
+              placeholder={'email'}
+              id={'email'}
+              name={'email'}
+              inputValue={userValues.email}
+              setValue={changeUserValueHandler}
             />
-            <Button
-              name={'Delete'}
-              clickHandler={function (): void {
-                throw new Error('Function not implemented.');
-              }}
-              type={'danger'}
+            <Input
+              type={'text'}
+              placeholder={'phone number'}
+              id={'phoneNumber'}
+              name={'phoneNumber'}
+              inputValue={userValues.phoneNumber}
+              setValue={changeUserValueHandler}
             />
+          </div>
+          <div className={classes['c-user__input-holder']}>
+            <div className={classes['c-user__last']}>
+              <Input
+                type={'address'}
+                placeholder={'address'}
+                id={'address'}
+                inputValue={userValues.address}
+                name={'address'}
+                setValue={changeUserValueHandler}
+              />
+            </div>
+            <div>
+              <Button
+                name={'Edit'}
+                clickHandler={() => editUser(userValues.id, userValues)}
+                type={'secondary'}
+              />
+              <Button
+                name={'Delete'}
+                clickHandler={() => deleteUser(userValues.id)}
+                type={'danger'}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };
