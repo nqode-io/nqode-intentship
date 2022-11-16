@@ -7,13 +7,14 @@ interface InputContainerProps {
   value?: string | number;
   type?: string;
   label: string;
+  name?: string;
 }
 
-const InputContainer = ({ onChange, value, label, type }: InputContainerProps) => {
+const InputContainer = ({ onChange, value, label, type, name }: InputContainerProps) => {
   return (
     <div className={classes['c-input-container']}>
       <label className={classes['c-input-container__input-label']}>{label}</label>
-      <Input onChange={onChange} value={value} type={type} />
+      <Input onChange={onChange} value={value} type={type} name={name} />
     </div>
   );
 };

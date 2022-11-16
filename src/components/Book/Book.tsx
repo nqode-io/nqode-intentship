@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import BookModel from 'models/BookModel';
 import axios from 'axios';
 import BookDialog from 'components/BookDialog/BookDialog';
+import tokenService from 'services/tokenService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -13,6 +14,7 @@ const Book = () => {
   const location = useLocation();
   const id = parseInt(location.pathname.split('/')[2]);
   const navigate = useNavigate();
+  const isAdmin = tokenService.isRoleAdmin();
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -48,16 +50,21 @@ const Book = () => {
             <strong className={classes['c-book__title']}>{book.title}</strong>
             <span className={classes['c-book__author']}>{book.author}</span>
             <span className={classes['c-book__description']}>{book.description}</span>
-            <span className={classes['c-book__num-of-copies']}>
-              Number of Copies: {book.numOfCopies}
-            </span>
+            {isAdmin ? (
+              <span className={classes['c-book__num-of-copies']}>
+                Number of Copies: {book.numOfCopies}
+              </span>
+            ) : null}
           </div>
           <div className={classes['c-book__tools']}>
-            <div>
-              <Button content="Modify" onClick={() => setModify(true)} />
-              <Button content="Delete" onClick={() => deleteBook()} />
-            </div>
-            <Button content="Rent" />
+            {isAdmin ? (
+              <>
+                <Button content="Edit" onClick={() => setModify(true)} />
+                <Button content="Delete" onClick={deleteBook} />
+              </>
+            ) : (
+              <Button content="Rent" />
+            )}
           </div>
         </div>
       ) : (
