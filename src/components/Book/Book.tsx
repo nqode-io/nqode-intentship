@@ -14,8 +14,7 @@ const Book = () => {
   const location = useLocation();
   const id = parseInt(location.pathname.split('/')[2]);
   const navigate = useNavigate();
-  const { isRoleAdmin } = tokenService;
-  const isAdmin = isRoleAdmin();
+  const isAdmin = tokenService.isRoleAdmin();
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -61,7 +60,7 @@ const Book = () => {
             {isAdmin ? (
               <>
                 <Button content="Edit" onClick={() => setModify(true)} />
-                <Button content="Delete" onClick={() => deleteBook()} />
+                <Button content="Delete" onClick={deleteBook} />
               </>
             ) : (
               <Button content="Rent" />
