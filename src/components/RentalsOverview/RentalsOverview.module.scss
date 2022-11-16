@@ -1,0 +1,19 @@
+@import 'variables.scss';
+
+.c-rentals-overview {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  width: 50%;
+  background-color: $color-lightgray;
+  border-radius: $space-s;
+
+  &__headers {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+
+    margin-bottom: $space-l;
+    font-weight: bold;
+  }
+}
