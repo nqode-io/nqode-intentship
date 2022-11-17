@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './Users.module.scss';
 import axios from 'axios';
 import User from './User/User';
@@ -9,35 +9,39 @@ import toastService from 'services/toastService';
 const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Users: React.FC = () => {
-
   const [users, setUsers] = useState<UserModel[]>([]);
 
-  const getUsers = () : void => {
-    axios.get(`${backend_url}/user`).then(res => {
+  const getUsers = (): void => {
+    axios.get(`${backend_url}/user`).then((res) => {
       setUsers(res.data.content);
     });
   };
 
-  const editUser = (id: number | string, user: UserModel) : void => {
-    axios.put(`${backend_url}/user/${id}`, user).then(()=>{
-      toastService.toastSuccess(`User with ID: ${id} updated!`);
-    }).catch((err)=>{ 
-      toastService.toastError(`${err.response.data.message}`);
-    })
-  }
+  const editUser = (id: number | string, user: UserModel): void => {
+    axios
+      .put(`${backend_url}/user/${id}`, user)
+      .then(() => {
+        toastService.toastSuccess(`User with ID: ${id} updated!`);
+      })
+      .catch((err) => {
+        toastService.toastError(`${err.response.data.message}`);
+      });
+  };
 
-  const deleteUser = (id: number | string) : void => {
-    axios.delete(`${backend_url}/user/${id}`).then(()=>{
-      toastService.toastSuccess(`User with ID: ${id} deleted!`)
-    }).catch((err)=>{ 
-      toastService.toastError(`${err.response.data.message}`)
-    })
-  }
+  const deleteUser = (id: number | string): void => {
+    axios
+      .delete(`${backend_url}/user/${id}`)
+      .then(() => {
+        toastService.toastSuccess(`User with ID: ${id} deleted!`);
+      })
+      .catch((err) => {
+        toastService.toastError(`${err.response.data.message}`);
+      });
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     getUsers();
-  }, [users]);
-  
+  }, []);
 
   return (
     <div className={classes['c-users']}>
@@ -46,10 +50,14 @@ const Users: React.FC = () => {
         <div>Email</div>
         <div>Phone number</div>
       </div>
-      {users.length ? users.map((user, index)=>{
-          return <User key={index} user={user} editUser={editUser} deleteUser={deleteUser}/>
-      }) : <div>There are no users!</div>}
-      <ToastContainer/>
+      {users.length ? (
+        users.map((user, index) => {
+          return <User key={index} user={user} editUser={editUser} deleteUser={deleteUser} />;
+        })
+      ) : (
+        <div>There are no users!</div>
+      )}
+      <ToastContainer />
     </div>
   );
 };
