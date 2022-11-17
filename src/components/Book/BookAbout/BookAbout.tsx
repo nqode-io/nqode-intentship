@@ -7,6 +7,9 @@ import axios from '../../../axios/axiosConfig';
 import Button from 'components/core/Button/Button';
 import authService from 'services/authService';
 import Input from 'components/core/Input/Input';
+import bookService from 'services/api/bookService';
+import rentService from 'services/api/rentService';
+import bookCopyService from 'services/api/bookCopyService';
 
 interface BookCopy {
   id: null;
@@ -20,31 +23,25 @@ const BookAbout: React.FC = () => {
   const [days, setDays] = useState<string>('');
 
   const { isAdministrator } = authService;
+  const { getBook } = bookService;
+  const { rentBook } = rentService;
+  const { createBookCopy } = bookCopyService;
 
-  const getBook = () => {
-    axios.get(`/book/${id}`).then((res) => {
-      setBook(res.data);
-    });
+  const fetchBookHandler = () => {
+    getBook(id).then((data) => setBook(data));
   };
 
-  const rentBook = () => {
-    axios
-      .post(`/rent/book/${id}/user?rentPeriod=${days}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err.response.data.message));
+  const rentBookHandler = () => {
+    rentBook(id, days)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
-  const createBookCopy = () => {
+  const createBookCopyHandler = () => {
     const data: BookCopy = { id: null, identifier: crypto.randomUUID(), bookId: id };
-
-    axios
-      .post(`/book/${id}/book-copy`, data)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err.response.data.message));
+    createBookCopy(id, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   const changeDaysHandler = (value: string) => {
@@ -52,7 +49,7 @@ const BookAbout: React.FC = () => {
   };
 
   useEffect(() => {
-    getBook();
+    fetchBookHandler();
   }, [id]);
 
   return (
@@ -78,8 +75,10 @@ const BookAbout: React.FC = () => {
           />
         </div>
         <div className={classes['c-book-details__buttons']}>
-          <Button name={'RENT'} clickHandler={rentBook} />
-          {isAdministrator() ? <Button name={'CREATE COPY'} clickHandler={createBookCopy} /> : null}
+          <Button name={'RENT'} clickHandler={rentBookHandler} />
+          {isAdministrator() ? (
+            <Button name={'CREATE COPY'} clickHandler={createBookCopyHandler} />
+          ) : null}
         </div>
         {isAdministrator() ? <Link to={`/book/edit/${id}`}>Edit book</Link> : null}
       </div>
