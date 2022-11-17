@@ -56,4 +56,13 @@
 
     margin-top: $space-s;
   }
+
+  &__days {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: $space-s;
+
+    color: $color-grey;
+  }
 }

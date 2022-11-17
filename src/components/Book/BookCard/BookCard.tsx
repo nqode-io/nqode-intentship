@@ -5,13 +5,8 @@ import classes from './BookCard.module.scss';
 import authService from 'services/authService';
 
 const BookCard: React.FC<Book> = ({ id, title, author, numOfCopies, imagePath }) => {
-  const { isAdministrator } = authService;
-
   return (
-    <Link
-      to={isAdministrator() ? `/book/edit/${id}` : `/book/${id}`}
-      className={classes['c-book-card']}
-    >
+    <Link to={`/book/${id}`} className={classes['c-book-card']}>
       <div className={classes['c-book-card__image-holder']}>
         <img src={require('../../../util/327752.jpeg')} className={classes['c-book-card__image']} />
       </div>
