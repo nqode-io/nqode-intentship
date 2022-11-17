@@ -8,6 +8,7 @@ import axios from 'axios';
 import BookDialog from 'components/BookDialog/BookDialog';
 import tokenService from 'services/tokenService';
 import rentalsService from 'services/rentalsService';
+import InputContainer from 'components/core/InputContainer/InputContainer';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -17,6 +18,7 @@ const Book = () => {
   const navigate = useNavigate();
   const isAdmin = tokenService.isRoleAdmin();
   const { createRental } = rentalsService;
+  const [rentPeriod, setRentPeriod] = useState<number>(0);
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -37,8 +39,12 @@ const Book = () => {
       .then(() => navigate('/booksoverview'));
   };
 
+  const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRentPeriod(parseInt(event.target.value));
+  };
+
   const rentBook = async () => {
-    await createRental(id, 3);
+    await createRental(id, rentPeriod);
   };
 
   useEffect(() => {
@@ -69,7 +75,10 @@ const Book = () => {
                 <Button content="Delete" onClick={deleteBook} />
               </>
             ) : (
-              <Button content="Rent" onClick={rentBook} />
+              <div>
+                <InputContainer onChange={handleRentPeriod} label="Rent peroid (days): " />
+                <Button content="Rent" onClick={rentBook} />
+              </div>
             )}
           </div>
         </div>

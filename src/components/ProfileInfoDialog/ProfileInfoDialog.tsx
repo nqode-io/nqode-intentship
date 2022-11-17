@@ -11,7 +11,6 @@ const ProfileInfoDialog = (oldUser: UserModel) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({ ...prev, [event.target.name]: event.target.value }));
-    console.log(user.email);
   };
 
   const modifyUser = async () => {
