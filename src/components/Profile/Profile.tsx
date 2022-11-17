@@ -1,13 +1,11 @@
-import axios from 'axios';
-import RentedBookCopy from 'model/RentedBookCopy';
-import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 import authService from 'services/authService';
 import CurrentlyRentedBooks from './CurrentlyRentedBooks/CurrentlyRentedBooks';
 import classes from './Profile.module.scss';
 import RentHistory from './RentHistory/RentHistory';
 import UserAbout from './UserAbout/UserAbout';
+import axios from '../../axios/axiosConfig';
 
 interface User {
   id: number;
@@ -18,8 +16,6 @@ interface User {
   phoneNumber: string;
 }
 
-const backend_url = process.env.REACT_APP_BACKEND_URL;
-
 const Profile: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [currentlyRented, setCurrentlyRented] = useState<RentedBookCopyOverview[]>([]);
@@ -29,7 +25,7 @@ const Profile: React.FC = () => {
 
   const getUser = () => {
     axios
-      .get(`${backend_url}/user/${userId}`)
+      .get(`/user/${userId}`)
       .then((res) => {
         setUser(res.data);
       })
@@ -37,7 +33,7 @@ const Profile: React.FC = () => {
   };
 
   const getCurrentlyRentedBooks = () => {
-    axios.get(`${backend_url}/rent/user/${userId}?current=true`).then((res) => {
+    axios.get(`/rent/user/${userId}?current=true`).then((res) => {
       console.log(res);
 
       setCurrentlyRented(res.data.content);
@@ -45,7 +41,7 @@ const Profile: React.FC = () => {
   };
 
   const getRentHistory = () => {
-    axios.get(`${backend_url}/rent/user/${userId}?current=false`).then((res) => {
+    axios.get(`/rent/user/${userId}?current=false`).then((res) => {
       setRentHistory(res.data.content);
     });
   };
