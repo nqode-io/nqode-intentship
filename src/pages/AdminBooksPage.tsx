@@ -1,11 +1,11 @@
-import AdminBooks from 'components/Book/AdminBook/AdminBooks';
-import StandardLayout from 'components/Layout/StandardLayout';
 import React from 'react';
+import Books from 'components/Book/Books';
+import StandardLayout from 'components/Layout/StandardLayout';
 
 const AdminBooksPage = () => {
   return (
     <StandardLayout>
-      <AdminBooks />
+      <Books />
     </StandardLayout>
   );
 };
