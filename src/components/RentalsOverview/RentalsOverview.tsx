@@ -1,8 +1,10 @@
-import axiosInstance from 'customAxios/customAxios';
 import RentalOverviewItem from 'components/RentalsOverviewItem/RentalsOverviewItem';
 import RentalModel from 'models/RentalModel';
 import React, { useEffect, useState } from 'react';
 import classes from './RentalsOverview.module.scss';
+import rentalsService from 'services/rentalsService';
+import tokenService from 'services/tokenService';
+import { useLocation } from 'react-router-dom';
 
 interface RentalsOverviewProps {
   componentType: 'current' | 'history';
@@ -10,6 +12,12 @@ interface RentalsOverviewProps {
 
 const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
   const [rentals, setRentals] = useState<RentalModel[]>([]);
+  const { getRentals, getRentalsByUser } = rentalsService;
+  const { isRoleAdmin } = tokenService;
+  const isAdmin = isRoleAdmin();
+
+  const location = useLocation();
+  const userId: number = parseInt(location.pathname.split('/')[2]);
 
   const params = {
     current: true,
@@ -23,13 +31,8 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
       params.current = false;
     }
 
-    const response = await axiosInstance.get('/rent/book', {
-      params,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setRentals(response.data.content);
+    const data = isAdmin ? await getRentalsByUser(userId, params) : await getRentals(params);
+    setRentals(data);
   };
 
   useEffect(() => {
@@ -43,9 +46,11 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
         <span>Start date</span>
         <span>End date</span>
       </div>
-      {rentals.map((item) => (
-        <RentalOverviewItem item={item} key={item.id} />
-      ))}
+      <div className={classes['c-rentals-overview__list-container']}>
+        {rentals.map((item) => (
+          <RentalOverviewItem item={item} key={item.id} />
+        ))}
+      </div>
     </div>
   );
 };

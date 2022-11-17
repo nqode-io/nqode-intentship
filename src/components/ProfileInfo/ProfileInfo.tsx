@@ -1,28 +1,26 @@
-import axios from 'axios';
+import Button from 'components/core/Button/Button';
+import Input from 'components/core/Input/Input';
+import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
+import UserModel from 'models/UserModel';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import tokenService from 'services/tokenService';
+import userService from 'services/userService';
 import classes from './ProfileInfo.module.scss';
 
-interface UserData {
-  email: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  phoneNumber: string;
-}
-
 const ProfileInfo = () => {
-  const [user, setUser] = useState<UserData>();
-  const { getUserId } = tokenService;
-  const id = getUserId();
+  const [user, setUser] = useState<UserModel>({} as UserModel);
+  const location = useLocation();
+  const id: number = parseInt(location.pathname.split('/')[2]);
+  const [modify, setModify] = useState<Boolean>(false);
+  const { isRoleAdmin } = tokenService;
+  const isAdmin = isRoleAdmin();
+
+  const { getUserById } = userService;
 
   const retriveUser = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setUser(response.data);
+    const data = await getUserById(id);
+    setUser(data);
   };
 
   useEffect(() => {
@@ -31,19 +29,40 @@ const ProfileInfo = () => {
 
   return (
     <div className={classes['c-profile-info']}>
-      <div
-        className={`${classes['c-profile-info__info-container']} ${classes['c-profile-info__info-container--primary']}`}
-      >
-        <strong>
-          {user?.firstName} {user?.lastName}
-        </strong>
-      </div>
-      <div
-        className={`${classes['c-profile-info__info-container']} ${classes['c-profile-info__info-container--secondary']}`}
-      >
-        <span>{user?.address}</span>
-        <span>{user?.phoneNumber}</span>
-      </div>
+      {!modify ? (
+        <div>
+          <div
+            className={`${classes['c-profile-info__info-container']} ${classes['c-profile-info__info-container--heading']}`}
+          >
+            <span>
+              {user.firstName} {user.lastName}
+            </span>
+          </div>
+          <div
+            className={`${classes['c-profile-info__info-container']} ${classes['c-profile-info__info-container--regular']}`}
+          >
+            <span>{user.address}</span>
+            <span>{user.phoneNumber}</span>
+          </div>
+          <div className={classes['c-profile-info__button-container']}>
+            {isAdmin ? (
+              <Button content={'Edit user'} onClick={() => setModify(true)}></Button>
+            ) : null}
+          </div>
+        </div>
+      ) : (
+        <div className={classes['c-profile-info__modify-container']}>
+          <ProfileInfoDialog
+            id={user.id}
+            email={user.email}
+            firstName={user.firstName}
+            lastName={user.lastName}
+            address={user.address}
+            phoneNumber={user.phoneNumber}
+          />
+          <Button content="Cancel" onClick={() => setModify(false)} />
+        </div>
+      )}
     </div>
   );
 };

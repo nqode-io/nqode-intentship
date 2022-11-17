@@ -6,6 +6,8 @@ import classes from './Navbar.module.scss';
 const Navbar = () => {
   const isUser = tokenService.isRoleUser();
   const isAdmin = tokenService.isRoleAdmin();
+  const { getUserId } = tokenService;
+  const id = getUserId();
 
   return (
     <div className={classes['c-navbar']}>
@@ -14,7 +16,7 @@ const Navbar = () => {
           Books
         </Link>
         {isUser ? (
-          <Link to="#" className={classes['c-navbar__link']}>
+          <Link to={`profile/${id}`} className={classes['c-navbar__link']}>
             Profile
           </Link>
         ) : null}

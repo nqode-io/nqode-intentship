@@ -7,6 +7,7 @@ import BookModel from 'models/BookModel';
 import axios from 'axios';
 import BookDialog from 'components/BookDialog/BookDialog';
 import tokenService from 'services/tokenService';
+import rentalsService from 'services/rentalsService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -15,6 +16,7 @@ const Book = () => {
   const id = parseInt(location.pathname.split('/')[2]);
   const navigate = useNavigate();
   const isAdmin = tokenService.isRoleAdmin();
+  const { createRental } = rentalsService;
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -33,6 +35,10 @@ const Book = () => {
         }
       })
       .then(() => navigate('/booksoverview'));
+  };
+
+  const rentBook = async () => {
+    await createRental(id, 3);
   };
 
   useEffect(() => {
@@ -63,7 +69,7 @@ const Book = () => {
                 <Button content="Delete" onClick={deleteBook} />
               </>
             ) : (
-              <Button content="Rent" />
+              <Button content="Rent" onClick={rentBook} />
             )}
           </div>
         </div>

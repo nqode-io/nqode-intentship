@@ -18,7 +18,6 @@ const isRoleAdmin = () => {
 
 const isRoleUser = () => {
   const role = getRole();
-  console.log(role);
   return role === 'USER' ? true : false;
 };
 

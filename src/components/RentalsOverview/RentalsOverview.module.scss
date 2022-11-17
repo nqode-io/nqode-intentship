@@ -13,7 +13,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
 
-    margin-bottom: $space-l;
+    margin-bottom: $space;
     font-weight: bold;
+  }
+
+  &__list-container {
+    display: flex;
+    flex-direction: column;
+    gap: $space;
   }
 }
