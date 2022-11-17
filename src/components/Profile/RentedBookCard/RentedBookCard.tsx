@@ -18,6 +18,7 @@ const RentedBookCard: React.FC<RentedBookCardProps> = ({ book, history }) => {
       }
     >
       <div>Rent id: {book.id}</div>
+      <div>Book copy id: {book.identifier}</div>
       <div>Book title: {book.title}</div>
       <div>Book author: {book.author}</div>
       <div>From: {book.startRentDate}</div>
