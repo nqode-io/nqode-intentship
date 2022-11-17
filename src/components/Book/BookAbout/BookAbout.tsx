@@ -22,7 +22,7 @@ const BookAbout: React.FC = () => {
   };
 
   const rentBook = () => {
-    axios.post(`${backend_url}/rent/book/${id}/user?rentPeriod=${days}`);
+    axios.post(`/rent/book/${id}/user?rentPeriod=${days}`);
   };
 
   useEffect(() => {
