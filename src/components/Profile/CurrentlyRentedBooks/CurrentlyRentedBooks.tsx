@@ -2,9 +2,10 @@ import React from 'react';
 import RentedBookCopy from 'model/RentedBookCopy';
 import classes from './CurrentlyRentedBooks.module.scss';
 import RentedBookCard from '../RentedBookCard/RentedBookCard';
+import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 
 interface CurrentlyRentedBooksProps {
-  currentlyRentedBooks: RentedBookCopy[];
+  currentlyRentedBooks: RentedBookCopyOverview[];
 }
 
 const CurrentlyRentedBooks: React.FC<CurrentlyRentedBooksProps> = ({ currentlyRentedBooks }) => {
@@ -14,17 +15,7 @@ const CurrentlyRentedBooks: React.FC<CurrentlyRentedBooksProps> = ({ currentlyRe
       <div className={classes['c-rented-books__books']}>
         {currentlyRentedBooks.length ? (
           currentlyRentedBooks.map((book, i) => {
-            return (
-              <RentedBookCard
-                key={i}
-                id={book.id}
-                userId={book.userId}
-                bookCopyId={book.bookCopyId}
-                startRentDate={book.startRentDate}
-                endRentDate={book.endRentDate}
-                cancelRentDate={book.cancelRentDate}
-              />
-            );
+            return <RentedBookCard key={i} book={book} />;
           })
         ) : (
           <div>You don't have any rented books!</div>

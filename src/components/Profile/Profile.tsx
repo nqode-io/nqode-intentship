@@ -1,5 +1,6 @@
 import axios from 'axios';
 import RentedBookCopy from 'model/RentedBookCopy';
+import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import authService from 'services/authService';
@@ -21,8 +22,8 @@ const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Profile: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
-  const [currentlyRented, setCurrentlyRented] = useState<RentedBookCopy[]>([]);
-  const [rentHistory, setRentHistory] = useState<RentedBookCopy[]>([]);
+  const [currentlyRented, setCurrentlyRented] = useState<RentedBookCopyOverview[]>([]);
+  const [rentHistory, setRentHistory] = useState<RentedBookCopyOverview[]>([]);
 
   const userId = authService.getIdFromJwt();
 
@@ -37,6 +38,8 @@ const Profile: React.FC = () => {
 
   const getCurrentlyRentedBooks = () => {
     axios.get(`${backend_url}/rent/user/${userId}?current=true`).then((res) => {
+      console.log(res);
+
       setCurrentlyRented(res.data.content);
     });
   };

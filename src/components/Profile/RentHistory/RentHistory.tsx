@@ -2,9 +2,10 @@ import React from 'react';
 import RentedBookCopy from 'model/RentedBookCopy';
 import classes from './RentHistory.module.scss';
 import RentedBookCard from '../RentedBookCard/RentedBookCard';
+import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 
 interface RentHistoryProps {
-  rentHistory: RentedBookCopy[];
+  rentHistory: RentedBookCopyOverview[];
 }
 
 const RentHistory: React.FC<RentHistoryProps> = ({ rentHistory }) => {
@@ -14,18 +15,7 @@ const RentHistory: React.FC<RentHistoryProps> = ({ rentHistory }) => {
       <div className={classes['c-rented-books__books']}>
         {rentHistory.length ? (
           rentHistory.map((book, i) => {
-            return (
-              <RentedBookCard
-                key={i}
-                history={true}
-                id={book.id}
-                userId={book.userId}
-                bookCopyId={book.bookCopyId}
-                startRentDate={book.startRentDate}
-                endRentDate={book.endRentDate}
-                cancelRentDate={book.cancelRentDate}
-              />
-            );
+            return <RentedBookCard key={i} history={true} book={book} />;
           })
         ) : (
           <div>Your history is empty!</div>

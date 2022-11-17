@@ -1,26 +1,14 @@
 import React from 'react';
 import RentedBookCopy from 'model/RentedBookCopy';
 import classes from './RentedBookCard.module.scss';
+import RentedBookCopyOverview from 'model/RentedBookCopyOverview';
 
 interface RentedBookCardProps {
   history?: boolean;
-  id: number;
-  userId: number;
-  bookCopyId: number;
-  startRentDate: string;
-  endRentDate: string;
-  cancelRentDate: null;
+  book: RentedBookCopyOverview;
 }
 
-const RentedBookCard: React.FC<RentedBookCardProps> = ({
-  id,
-  userId,
-  bookCopyId,
-  startRentDate,
-  endRentDate,
-  cancelRentDate,
-  history
-}) => {
+const RentedBookCard: React.FC<RentedBookCardProps> = ({ book, history }) => {
   return (
     <div
       className={
@@ -29,10 +17,11 @@ const RentedBookCard: React.FC<RentedBookCardProps> = ({
           : `${classes['c-rented-book-card']}`
       }
     >
-      <div>Rent id: {id}</div>
-      <div>Book copy: {bookCopyId}</div>
-      <div>From: {startRentDate}</div>
-      <div>To: {endRentDate}</div>
+      <div>Rent id: {book.id}</div>
+      <div>Book title: {book.title}</div>
+      <div>Book author: {book.author}</div>
+      <div>From: {book.startRentDate}</div>
+      <div>To: {book.endRentDate}</div>
     </div>
   );
 };
