@@ -12,16 +12,20 @@ const BookAbout: React.FC = () => {
   const { id } = useParams();
   const [book, setBook] = useState<Book>({} as Book);
 
-  useEffect(() => {
+  const getBook = () => {
     axios.get(`${backend_url}/book/${id}`).then((res) => {
       setBook(res.data);
     });
+  };
+
+  useEffect(() => {
+    getBook();
   }, [id]);
 
   return (
     <div className={classes['c-book-details']}>
       <div className={classes['c-book-details__image-holder']}>
-        <img src={image} className={classes['c-book-details-image']} />
+        <img src={image} className={classes['c-book-details__image']} />
       </div>
       <div className={classes['c-book-details__about']}>
         <h1>{book.title}</h1>
@@ -31,12 +35,7 @@ const BookAbout: React.FC = () => {
           Number of copies : {book.numOfCopies}
         </div>
         <div className={classes['c-book-details__buttons']}>
-          <Button
-            name={'RENT'}
-            clickHandler={function (): void {
-              throw new Error('Function not implemented.');
-            }}
-          ></Button>
+          <Button name={'RENT'} />
         </div>
       </div>
     </div>
