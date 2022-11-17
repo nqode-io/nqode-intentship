@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios/axiosConfig';
 import Button from 'components/core/Button/Button';
 import Input from 'components/core/Input/Input';
 import { Link, useNavigate } from 'react-router-dom';
 import classes from './Login.module.scss';
-
-const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Login: React.FC = () => {
   const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -22,7 +20,7 @@ const Login: React.FC = () => {
 
   const submitLoginHandler = (): void => {
     axios
-      .post(`${backend_url}/authenticate`, loginData)
+      .post(`/authenticate`, loginData)
       .then((response) => {
         if (response.status === 200) {
           localStorage.setItem('token', response.data.accessToken);

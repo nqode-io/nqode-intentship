@@ -3,17 +3,15 @@ import classes from './BookAbout.module.scss';
 import image from 'util/327752.jpeg';
 import { useParams } from 'react-router-dom';
 import Book from 'model/Book';
-import axios from 'axios';
+import axios from '../../../axios/axiosConfig';
 import Button from 'components/core/Button/Button';
-
-const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const BookAbout: React.FC = () => {
   const { id } = useParams();
   const [book, setBook] = useState<Book>({} as Book);
 
   const getBook = () => {
-    axios.get(`${backend_url}/book/${id}`).then((res) => {
+    axios.get(`/book/${id}`).then((res) => {
       setBook(res.data);
     });
   };

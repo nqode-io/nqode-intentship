@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios from '../../axios/axiosConfig';
 import BookCard from './BookCard/BookCard';
 import classes from './Books.module.scss';
 import Book from 'model/Book';
-
-const backend_url = process.env.REACT_APP_BACKEND_URL;
 
 const Books: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
 
   const getBooks = (): void => {
     axios
-      .get(`${backend_url}/book`, {
+      .get(`/book`, {
         params: {
           page: 0,
           size: 10,

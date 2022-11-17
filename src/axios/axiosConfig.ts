@@ -1,4 +1,6 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig } from 'axios';
+
+const axios = Axios.create({ baseURL: process.env.REACT_APP_BACKEND_URL });
 
 const onRequest = (config: AxiosRequestConfig): AxiosRequestConfig => {
   const token = localStorage.getItem('token');
@@ -12,10 +14,6 @@ const onRequestError = (error: AxiosError): Promise<AxiosError> => {
   return Promise.reject(error);
 };
 
-const requestInterceptor = () => {
-  axios.interceptors.request.use(onRequest, onRequestError);
-};
+axios.interceptors.request.use(onRequest, onRequestError);
 
-const axiosConfig = { requestInterceptor };
-
-export default axiosConfig;
+export default axios;
