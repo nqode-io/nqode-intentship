@@ -5,8 +5,8 @@ import Button from 'components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputContainer from 'components/core/InputContainer/InputContainer';
-import { UserContext } from 'contexts/userContext';
-import tokenService from 'services/tokenService';
+import { RoleContext } from 'contexts/roleContext';
+import { getRole } from 'services/tokenService';
 
 interface CredentialsForm {
   username: string;
@@ -18,8 +18,8 @@ const Login = () => {
     username: '',
     password: ''
   });
-  const { getRole } = tokenService;
-  const { setRole } = useContext(UserContext);
+
+  const { setRole } = useContext(RoleContext);
   const navigate = useNavigate();
 
   const handleToken = (token: string) => {

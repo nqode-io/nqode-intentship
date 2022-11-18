@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import 'index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { UserContextProvider } from 'contexts/userContext';
+import { RoleContextProvider } from 'contexts/roleContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <UserContextProvider>
+    <RoleContextProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </UserContextProvider>
+    </RoleContextProvider>
   </React.StrictMode>
 );

@@ -1,30 +1,26 @@
+import React, { useEffect, useState } from 'react';
 import Button from 'components/core/Button/Button';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import UserModel from 'models/UserModel';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import tokenService from 'services/tokenService';
-import userService from 'services/userService';
+import { useNavigate, useParams } from 'react-router-dom';
+import { isRoleAdmin } from 'services/tokenService';
+import { getUserById, deleteUser } from 'services/userService';
 import classes from './ProfileInfo.module.scss';
 
 const ProfileInfo = () => {
   const [user, setUser] = useState<UserModel>({} as UserModel);
-  const location = useLocation();
-  const id: number = parseInt(location.pathname.split('/')[2]);
   const [modify, setModify] = useState<Boolean>(false);
-  const { isRoleAdmin } = tokenService;
-  const isAdmin = isRoleAdmin();
-  const { getUserById } = userService;
-  const { deleteUser } = userService;
+
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const retriveUser = async () => {
-    const data = await getUserById(id);
+    const data = await getUserById(Number(id));
     setUser(data);
   };
 
   const handleDelete = async () => {
-    await deleteUser(id);
+    await deleteUser(Number(id));
     navigate('/dashboard');
   };
 
@@ -50,12 +46,12 @@ const ProfileInfo = () => {
             <span>{user.phoneNumber}</span>
           </div>
           <div className={classes['c-profile-info__button-container']}>
-            {isAdmin ? (
+            {isRoleAdmin() && (
               <>
                 <Button content={'Edit user'} onClick={() => setModify(true)}></Button>
                 <Button content={'Delete user'} onClick={handleDelete}></Button>
               </>
-            ) : null}
+            )}
           </div>
         </div>
       ) : (

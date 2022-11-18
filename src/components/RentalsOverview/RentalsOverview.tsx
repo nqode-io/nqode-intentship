@@ -1,10 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import RentalOverviewItem from 'components/RentalsOverviewItem/RentalsOverviewItem';
 import RentalModel from 'models/RentalModel';
-import React, { useEffect, useState } from 'react';
 import classes from './RentalsOverview.module.scss';
-import rentalsService from 'services/rentalsService';
-import tokenService from 'services/tokenService';
-import { useLocation } from 'react-router-dom';
+import { getRentals, getRentalsByUser } from 'services/rentalsService';
+import { isRoleAdmin } from 'services/tokenService';
+import { useParams } from 'react-router-dom';
 
 interface RentalsOverviewProps {
   componentType: 'current' | 'history';
@@ -12,12 +12,8 @@ interface RentalsOverviewProps {
 
 const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
   const [rentals, setRentals] = useState<RentalModel[]>([]);
-  const { getRentals, getRentalsByUser } = rentalsService;
-  const { isRoleAdmin } = tokenService;
-  const isAdmin = isRoleAdmin();
 
-  const location = useLocation();
-  const userId: number = parseInt(location.pathname.split('/')[2]);
+  const userId = useParams();
 
   const params = {
     current: true,
@@ -31,7 +27,9 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
       params.current = false;
     }
 
-    const data = isAdmin ? await getRentalsByUser(userId, params) : await getRentals(params);
+    const data = isRoleAdmin()
+      ? await getRentalsByUser(Number(userId), params)
+      : await getRentals(params);
     setRentals(data);
   };
 

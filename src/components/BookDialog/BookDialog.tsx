@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import BookModel from 'models/BookModel';
-import React, { useState } from 'react';
 import classes from './BookDialog.module.scss';
 
 const BookDialog = (oldBook: BookModel) => {

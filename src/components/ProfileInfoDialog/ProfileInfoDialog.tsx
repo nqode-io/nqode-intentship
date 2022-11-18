@@ -1,13 +1,12 @@
+import React, { useState } from 'react';
 import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import UserModel from 'models/UserModel';
-import React, { useState } from 'react';
-import userService from 'services/userService';
+import { updateUser } from 'services/userService';
 import classes from './ProfileInfoDialog.module.scss';
 
 const ProfileInfoDialog = (oldUser: UserModel) => {
   const [user, setUser] = useState<UserModel>(oldUser);
-  const { updateUser } = userService;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({ ...prev, [event.target.name]: event.target.value }));

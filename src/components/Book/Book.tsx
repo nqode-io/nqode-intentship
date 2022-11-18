@@ -2,23 +2,21 @@ import React, { useEffect, useState } from 'react';
 import classes from './Book.module.scss';
 import image from 'img/book1.png';
 import Button from 'components/core/Button/Button';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import BookModel from 'models/BookModel';
 import axios from 'axios';
 import BookDialog from 'components/BookDialog/BookDialog';
-import tokenService from 'services/tokenService';
-import rentalsService from 'services/rentalsService';
+import { isRoleAdmin } from 'services/tokenService';
+import { createRental } from 'services/rentalsService';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
   const [modify, setModify] = useState<Boolean>(false);
-  const location = useLocation();
-  const id = parseInt(location.pathname.split('/')[2]);
-  const navigate = useNavigate();
-  const isAdmin = tokenService.isRoleAdmin();
-  const { createRental } = rentalsService;
   const [rentPeriod, setRentPeriod] = useState<number>(0);
+
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const retriveBook = async () => {
     const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
@@ -44,7 +42,7 @@ const Book = () => {
   };
 
   const rentBook = async () => {
-    await createRental(id, rentPeriod);
+    await createRental(Number(id), rentPeriod);
   };
 
   useEffect(() => {
@@ -56,20 +54,32 @@ const Book = () => {
       <div className={classes['c-book__image-container']}>
         <img className={classes['c-book__image']} alt="" src={image}></img>
       </div>
-      {!modify ? (
+      {modify ? (
+        <div className={classes['c-book__modify-container']}>
+          <BookDialog
+            id={book.id}
+            title={book.title}
+            author={book.author}
+            description={book.description}
+            imagePath={book.imagePath}
+            numOfCopies={book.numOfCopies}
+          />
+          <Button content="Cancel" onClick={() => setModify(false)} />
+        </div>
+      ) : (
         <div className={classes['c-book__side-content']}>
           <div className={classes['c-book__info-container']}>
             <strong className={classes['c-book__title']}>{book.title}</strong>
             <span className={classes['c-book__author']}>{book.author}</span>
             <span className={classes['c-book__description']}>{book.description}</span>
-            {isAdmin ? (
+            {isRoleAdmin() && (
               <span className={classes['c-book__num-of-copies']}>
                 Number of Copies: {book.numOfCopies}
               </span>
-            ) : null}
+            )}
           </div>
           <div className={classes['c-book__tools']}>
-            {isAdmin ? (
+            {isRoleAdmin() ? (
               <>
                 <Button content="Edit" onClick={() => setModify(true)} />
                 <Button content="Delete" onClick={deleteBook} />
@@ -81,18 +91,6 @@ const Book = () => {
               </div>
             )}
           </div>
-        </div>
-      ) : (
-        <div className={classes['c-book__modify-container']}>
-          <BookDialog
-            id={book.id}
-            title={book.title}
-            author={book.author}
-            description={book.description}
-            imagePath={book.imagePath}
-            numOfCopies={book.numOfCopies}
-          />
-          <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       )}
     </div>
