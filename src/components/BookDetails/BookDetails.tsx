@@ -54,7 +54,7 @@ const BookDetails: React.FC = () => {
       <div className={classes['c-book-details__about']}>
         <Input
           type={'text'}
-          placeholder={'Title...'}
+          placeholder={'Title'}
           value={book.title}
           id={'title'}
           label={'Title'}
@@ -64,7 +64,7 @@ const BookDetails: React.FC = () => {
         <div className={classes['c-book-details__author']}>
           <Input
             type={'text'}
-            placeholder={'Author...'}
+            placeholder={'Author'}
             id={'author'}
             label={'Author'}
             value={book.author}
@@ -75,7 +75,7 @@ const BookDetails: React.FC = () => {
         <div className={classes['c-book-details__description']}>
           <Input
             type={'text'}
-            placeholder={'Description...'}
+            placeholder={'Description'}
             id={'description'}
             label={'Description'}
             value={book.description}
@@ -87,8 +87,8 @@ const BookDetails: React.FC = () => {
           Number of copies : {book.numOfCopies}
         </div>
         <div className={classes['c-book-details__buttons']}>
-          <Button name="Edit" type="secondary" clickHandler={editBookHandler}></Button>
-          <Button name="Delete" type="danger" clickHandler={deleteBookHandler}></Button>
+          <Button name="Edit" type="secondary" clickHandler={editBookHandler} />
+          <Button name="Delete" type="danger" clickHandler={deleteBookHandler} />
         </div>
       </div>
     </div>
