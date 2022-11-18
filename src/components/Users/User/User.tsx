@@ -33,7 +33,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
           <div className={classes['c-user__input-holder']}>
             <Input
               type={'text'}
-              placeholder={'first name'}
+              placeholder={'First name'}
               id={'firstName'}
               name={'firstName'}
               inputValue={userValues.firstName}
@@ -41,7 +41,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
             />
             <Input
               type={'text'}
-              placeholder={'last name'}
+              placeholder={'Last name'}
               id={'lastName'}
               inputValue={userValues.lastName}
               name={'lastName'}
@@ -51,7 +51,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
           <div className={classes['c-user__input-holder']}>
             <Input
               type={'text'}
-              placeholder={'email'}
+              placeholder={'Email'}
               id={'email'}
               name={'email'}
               inputValue={userValues.email}
@@ -59,7 +59,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
             />
             <Input
               type={'text'}
-              placeholder={'phone number'}
+              placeholder={'Phone number'}
               id={'phoneNumber'}
               name={'phoneNumber'}
               inputValue={userValues.phoneNumber}
@@ -70,7 +70,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
             <div className={classes['c-user__last']}>
               <Input
                 type={'address'}
-                placeholder={'address'}
+                placeholder={'Address'}
                 id={'address'}
                 inputValue={userValues.address}
                 name={'address'}

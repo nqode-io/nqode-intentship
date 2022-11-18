@@ -22,7 +22,7 @@ const Users: React.FC = () => {
         toastService.toastSuccess(`User with ID: ${id} updated!`);
       })
       .catch((err) => {
-        toastService.toastError(`${err.response.data.message}`);
+        toastService.toastError(`Something went wrong. Try again later.`);
       });
   };
 
@@ -33,7 +33,7 @@ const Users: React.FC = () => {
         toastService.toastSuccess(`User with ID: ${id} deleted!`);
       })
       .catch((err) => {
-        toastService.toastError(`${err.response.data.message}`);
+        toastService.toastError(`Something went wrong. Try again later.`);
       });
   };
 
