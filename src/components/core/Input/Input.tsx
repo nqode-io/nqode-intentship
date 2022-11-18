@@ -39,7 +39,7 @@ const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           id={id}
           name={name}
-          onChange={(event) => setValue(event.target.value, name)}
+          onChange={(event) => setValue!(event.target.value, name)}
         />
       ) : (
         <input
@@ -50,7 +50,7 @@ const Input: React.FC<InputProps> = ({
           name={name}
           value={value}
           readOnly={readonly}
-          onChange={(event) => setValue(event.target.value, name)}
+          onChange={(event) => setValue!(event.target.value, name)}
         />
       )}
     </div>
