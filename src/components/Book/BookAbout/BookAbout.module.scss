@@ -22,6 +22,8 @@
   }
 
   &__image {
+    object-fit: contain;
+
     width: 100%;
   }
 
@@ -53,5 +55,18 @@
     flex-wrap: wrap;
 
     margin-top: $space-s;
+  }
+
+  &__days {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: $space-s;
+
+    color: $color-grey;
+  }
+
+  &__days-explained {
+    margin-bottom: $space-s;
   }
 }

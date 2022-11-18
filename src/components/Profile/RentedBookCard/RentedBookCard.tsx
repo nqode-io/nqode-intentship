@@ -8,7 +8,10 @@ interface RentedBookCardProps {
   book: RentedBookCopyOverview;
 }
 
-const RentedBookCard: React.FC<RentedBookCardProps> = ({ book, history }) => {
+const RentedBookCard: React.FC<RentedBookCardProps> = ({
+  book: { id, identifier, title, author, startRentDate, endRentDate },
+  history
+}) => {
   return (
     <div
       className={
@@ -17,11 +20,12 @@ const RentedBookCard: React.FC<RentedBookCardProps> = ({ book, history }) => {
           : `${classes['c-rented-book-card']}`
       }
     >
-      <div>Rent id: {book.id}</div>
-      <div>Book title: {book.title}</div>
-      <div>Book author: {book.author}</div>
-      <div>From: {book.startRentDate}</div>
-      <div>To: {book.endRentDate}</div>
+      <div>Rent id: {id}</div>
+      <div>Book copy id: {identifier}</div>
+      <div>Book title: {title}</div>
+      <div>Book author: {author}</div>
+      <div>From: {startRentDate}</div>
+      <div>To: {endRentDate}</div>
     </div>
   );
 };

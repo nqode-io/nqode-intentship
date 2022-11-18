@@ -2,13 +2,13 @@ import axios from '../../axios/axiosConfig';
 import Book from 'model/Book';
 
 const getBook = (id: string) => {
-  return axios.get<Book>(`/book/${id}`).then((res) => {
+  return axios.get(`/book/${id}`).then((res) => {
     return res.data;
   });
 };
 
 const editBook = (id: string, book: Book) => {
-  return axios.put<Book>(`/book/${id}`, book).then((res) => {
+  return axios.put<Book>(`$/book/${id}`, book).then((res) => {
     return res.data;
   });
 };
