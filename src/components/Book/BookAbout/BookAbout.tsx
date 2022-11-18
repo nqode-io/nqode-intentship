@@ -27,7 +27,7 @@ const BookAbout: React.FC = () => {
   const { createBookCopy } = bookCopyService;
 
   const fetchBookHandler = () => {
-    getBook(book.id).then((data) => setBook(data));
+    getBook(id!).then((data) => setBook(data));
   };
 
   const rentBookHandler = () => {
@@ -37,7 +37,7 @@ const BookAbout: React.FC = () => {
   };
 
   const createBookCopyHandler = () => {
-    const data: BookCopy = { id: null, identifier: crypto.randomUUID(), bookId: book.id };
+    const data: BookCopy = { id: null, identifier: crypto.randomUUID(), bookId: `${book.id}` };
     createBookCopy(id, data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
