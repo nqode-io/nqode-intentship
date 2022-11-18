@@ -1,8 +1,8 @@
+import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'components/core/Button/Button';
 import InputContainer from 'components/core/InputContainer/InputContainer';
 import BookModel from 'models/BookModel';
-import React, { useState } from 'react';
 import classes from './BookDialog.module.scss';
 
 const BookDialog = (oldBook: BookModel) => {
@@ -23,10 +23,20 @@ const BookDialog = (oldBook: BookModel) => {
   return (
     <div className={classes['c-book-dialog']}>
       <div className={classes['c-book-dialog__container']}>
-        <InputContainer onChange={handleChange} value={book.title} label="Title" />
-        <InputContainer onChange={handleChange} value={book.author} label="Author" />
-        <InputContainer onChange={handleChange} value={book.description} label="Description" />
-        <InputContainer onChange={handleChange} value={book.numOfCopies} label="Number of Copies" />
+        <InputContainer onChange={handleChange} name="title" value={book.title} label="Title" />
+        <InputContainer onChange={handleChange} name="author" value={book.author} label="Author" />
+        <InputContainer
+          onChange={handleChange}
+          name="description"
+          value={book.description}
+          label="Description"
+        />
+        <InputContainer
+          onChange={handleChange}
+          name="numOfCopies"
+          value={book.numOfCopies}
+          label="Number of Copies"
+        />
       </div>
       <div className={classes['c-book-dialog__button-container']}>
         <Button content={'Submit'} onClick={updateBook} />

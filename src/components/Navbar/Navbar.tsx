@@ -1,33 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { RoleContext } from 'contexts/roleContext';
 import { Link } from 'react-router-dom';
-import tokenService from 'services/tokenService';
+import { isRoleAdmin, isRoleUser, getUserId } from 'services/tokenService';
 import classes from './Navbar.module.scss';
 
 const Navbar = () => {
-  const isUser = tokenService.isRoleUser();
-  const isAdmin = tokenService.isRoleAdmin();
+  const id = getUserId();
+  const { setRole } = useContext(RoleContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setRole('');
+  };
+
+  const renderAdminLinks = () => {
+    return (
+      <>
+        <Link to="/dashboard" className={classes['c-navbar__link']}>
+          Overview
+        </Link>
+        <Link to="#" className={classes['c-navbar__link']}>
+          Users
+        </Link>
+      </>
+    );
+  };
 
   return (
     <div className={classes['c-navbar']}>
-      <div className={classes['c-navbar--left']}>
+      <div>
         <Link to={`/booksoverview`} className={classes['c-navbar__link']}>
           Books
         </Link>
-        {isUser ? (
-          <Link to="#" className={classes['c-navbar__link']}>
+        {isRoleUser() && (
+          <Link to={`profile/${id}`} className={classes['c-navbar__link']}>
             Profile
           </Link>
-        ) : null}
-        {isAdmin ? (
-          <>
-            <Link to="/dashboard" className={classes['c-navbar__link']}>
-              Overview
-            </Link>
-            <Link to="#" className={classes['c-navbar__link']}>
-              Users
-            </Link>
-          </>
-        ) : null}
+        )}
+        {isRoleAdmin() && renderAdminLinks()}
+      </div>
+      <div>
+        <Link to="/" className={classes['c-navbar__link']} onClick={handleLogout}>
+          Logout
+        </Link>
       </div>
     </div>
   );
