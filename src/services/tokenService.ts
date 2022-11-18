@@ -8,7 +8,7 @@ const getDecodedToken = (): TokenData | null => {
 
 const getRole = () => {
   const decoded = getDecodedToken();
-  return decoded ? decoded.userRole : null;
+  return decoded ? decoded.userRole : '';
 };
 
 const isRoleAdmin = () => {
@@ -26,6 +26,6 @@ const getUserId = () => {
   return decoded ? decoded.userId : null;
 };
 
-const tokenService = { isRoleAdmin, isRoleUser, getUserId };
+const tokenService = { isRoleAdmin, isRoleUser, getUserId, getRole };
 
 export default tokenService;

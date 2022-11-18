@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import classes from './Login.module.scss';
 import Button from 'components/core/Button/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import InputContainer from 'components/core/InputContainer/InputContainer';
+import { UserContext } from 'contexts/userContext';
+import tokenService from 'services/tokenService';
 
 interface CredentialsForm {
   username: string;
@@ -16,11 +18,13 @@ const Login = () => {
     username: '',
     password: ''
   });
-
+  const { getRole } = tokenService;
+  const { setRole } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleToken = (token: string) => {
     localStorage.setItem('token', token);
+    setRole(getRole());
   };
 
   const handleLogin = async () => {

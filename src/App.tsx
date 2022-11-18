@@ -7,11 +7,12 @@ import SingleBook from 'pages/SingleBook/SingleBook';
 import Navbar from 'components/Navbar/Navbar';
 import Dashboard from 'pages/Admin/Dashboard/Dashboard';
 import Profile from 'pages/Profile/Profile';
+import { UserContext } from 'contexts/userContext';
 
 const App = () => {
   return (
     <div className={classes['c-app']}>
-      <Navbar />
+      <UserContext.Consumer>{({ role }) => <Navbar />}</UserContext.Consumer>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />

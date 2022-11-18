@@ -20,6 +20,14 @@ const updateUser = async (id: number, user: UserModel) => {
   return response.data;
 };
 
-const userService = { getUserById, updateUser };
+const deleteUser = async (id: number) => {
+  await axiosInstance.delete(`${process.env.REACT_APP_BASE_URL}/user/${id}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  });
+};
+
+const userService = { getUserById, updateUser, deleteUser };
 
 export default userService;

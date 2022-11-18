@@ -1,9 +1,8 @@
 import Button from 'components/core/Button/Button';
-import Input from 'components/core/Input/Input';
 import ProfileInfoDialog from 'components/ProfileInfoDialog/ProfileInfoDialog';
 import UserModel from 'models/UserModel';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import tokenService from 'services/tokenService';
 import userService from 'services/userService';
 import classes from './ProfileInfo.module.scss';
@@ -15,12 +14,18 @@ const ProfileInfo = () => {
   const [modify, setModify] = useState<Boolean>(false);
   const { isRoleAdmin } = tokenService;
   const isAdmin = isRoleAdmin();
-
   const { getUserById } = userService;
+  const { deleteUser } = userService;
+  const navigate = useNavigate();
 
   const retriveUser = async () => {
     const data = await getUserById(id);
     setUser(data);
+  };
+
+  const handleDelete = async () => {
+    await deleteUser(id);
+    navigate('/dashboard');
   };
 
   useEffect(() => {
@@ -46,7 +51,10 @@ const ProfileInfo = () => {
           </div>
           <div className={classes['c-profile-info__button-container']}>
             {isAdmin ? (
-              <Button content={'Edit user'} onClick={() => setModify(true)}></Button>
+              <>
+                <Button content={'Edit user'} onClick={() => setModify(true)}></Button>
+                <Button content={'Delete user'} onClick={handleDelete}></Button>
+              </>
             ) : null}
           </div>
         </div>
