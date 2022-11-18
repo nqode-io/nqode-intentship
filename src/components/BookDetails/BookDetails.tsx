@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import bookService from 'services/api/bookService';
 import authService from 'services/authService';
 import Input from 'components/core/Input/Input';
-import Book from 'components/model/Book';
+import Book from 'model/Book';
 
 const BookDetails: React.FC = () => {
   const { id } = useParams();
@@ -38,7 +38,7 @@ const BookDetails: React.FC = () => {
   };
 
   useEffect(() => {
-    getBook(id)
+    getBook(id!)
       .then((res) => {
         console.log(res);
         setBook(res);

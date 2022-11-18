@@ -69,7 +69,7 @@ const CreateBook: React.FC = () => {
         ></input>
       </div>
       <div className={classes['c-create-book-form__page_button']}>
-        <Button name={'Create new book'} clickHandler={submitCreateBookHandler} />
+        <Button name={'Create new book'} clickHandler={submitCreateBookHandler} type={'primary'} />
       </div>
     </div>
   );

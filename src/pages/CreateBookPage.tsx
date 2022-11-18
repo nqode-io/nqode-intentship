@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateBook from 'components/CreateBook/CreateBook';
+import CreateBook from 'components/Book/CreateBook/CreateBook';
 import StandardLayout from 'components/Layout/StandardLayout';
 
 const CreateBookPage = () => {

@@ -33,7 +33,7 @@ const BookAbout: React.FC = () => {
           Number of copies : {book.numOfCopies}
         </div>
         <div className={classes['c-book-details__buttons']}>
-          <Button name={'RENT'} />
+          <Button name={'Rent'} type={'primary'} />
         </div>
       </div>
     </div>
