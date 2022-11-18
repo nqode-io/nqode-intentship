@@ -28,7 +28,6 @@ const Login: React.FC = () => {
         }
       })
       .catch((err) => {
-        console.log(err.status);
         setInputError(true);
       });
   };

@@ -6,6 +6,7 @@ import ProfilePage from 'pages/ProfilePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserBookPage from 'pages/User/UserBookPage';
 import BookDetailsPage from 'pages/BookDetailsPage';
+import ManageUsersPage from 'pages/Admin/ManageUsersPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/book/:id" element={<UserBookPage />} />
         <Route path="/book/edit/:id" element={<BookDetailsPage />} />
         <Route path="/create-book" element={<CreateBookPage />} />
+        <Route path="/manage-users" element={<ManageUsersPage />} />
       </Routes>
     </BrowserRouter>
   );
