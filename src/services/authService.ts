@@ -29,11 +29,16 @@ const isAdministrator = (): boolean => {
   return getRoleFromJwt() === 'ADMINISTRATOR';
 };
 
+const isUser = (): boolean => {
+  return getRoleFromJwt() === 'USER';
+};
+
 const authService = {
   getDecodedJwt,
   getRoleFromJwt,
   getIdFromJwt,
-  isAdministrator
+  isAdministrator,
+  isUser
 };
 
 export default authService;

@@ -25,10 +25,12 @@ const Login: React.FC = () => {
         if (response.status === 200) {
           localStorage.setItem('token', response.data.accessToken);
           navigate('/profile');
-          console.log('Welcome.');
         }
       })
-      .catch((err) => setInputError(true));
+      .catch((err) => {
+        console.log(err.status);
+        setInputError(true);
+      });
   };
 
   return (
@@ -59,7 +61,7 @@ const Login: React.FC = () => {
             setValue={changePasswordHandler}
           />
         </div>
-        <Button name="Login" clickHandler={submitLoginHandler}></Button>
+        <Button name="Login" clickHandler={submitLoginHandler} type="primary"></Button>
         {inputError ? (
           <div className={classes['c-login__error-message']}>
             Ups... Wrong password or username.

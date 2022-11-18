@@ -7,10 +7,21 @@ interface InputProps {
   id: string;
   name: string;
   label?: string;
+  value?: string | number;
   setValue: (value: string) => void;
+  readonly?: boolean;
 }
 
-const Input: React.FC<InputProps> = ({ type, placeholder, id, name, label, setValue }) => {
+const Input: React.FC<InputProps> = ({
+  type,
+  placeholder,
+  id,
+  name,
+  label,
+  setValue,
+  value,
+  readonly
+}) => {
   return (
     <div className={classes['c-input']}>
       {label ? (
@@ -24,6 +35,8 @@ const Input: React.FC<InputProps> = ({ type, placeholder, id, name, label, setVa
         placeholder={placeholder}
         id={id}
         name={name}
+        value={value}
+        readOnly={readonly}
         onChange={(event) => setValue(event.target.value)}
       />
     </div>
