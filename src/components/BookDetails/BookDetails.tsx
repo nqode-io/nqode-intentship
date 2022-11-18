@@ -37,7 +37,7 @@ const BookDetails: React.FC = () => {
     editBook(book.id, book).then((res) => window.location.reload());
   };
 
-  useEffect(() => {
+  const getBookHanlder = () => {
     getBook(id!)
       .then((res) => {
         console.log(res);
