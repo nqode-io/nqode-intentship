@@ -1,7 +1,7 @@
 import axios from '../../axios/axiosConfig';
 import Book from 'model/Book';
 
-const getBook = (id: string | undefined) => {
+const getBook = (id: string) => {
   return axios.get(`/book/${id}`).then((res) => {
     return res.data;
   });

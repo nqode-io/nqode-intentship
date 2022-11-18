@@ -3,7 +3,6 @@ import classes from './BookAbout.module.scss';
 import image from 'util/327752.jpeg';
 import { Link, useParams } from 'react-router-dom';
 import Book from 'model/Book';
-import axios from '../../../axios/axiosConfig';
 import Button from 'components/core/Button/Button';
 import authService from 'services/authService';
 import Input from 'components/core/Input/Input';
@@ -14,7 +13,7 @@ import bookCopyService from 'services/api/bookCopyService';
 interface BookCopy {
   id: null;
   identifier: string;
-  bookId: string | undefined;
+  bookId: string;
 }
 
 const BookAbout: React.FC = () => {
@@ -28,17 +27,17 @@ const BookAbout: React.FC = () => {
   const { createBookCopy } = bookCopyService;
 
   const fetchBookHandler = () => {
-    getBook(id).then((data) => setBook(data));
+    getBook(book.id).then((data) => setBook(data));
   };
 
   const rentBookHandler = () => {
-    rentBook(id, days)
+    rentBook(book.id, days)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
 
   const createBookCopyHandler = () => {
-    const data: BookCopy = { id: null, identifier: crypto.randomUUID(), bookId: id };
+    const data: BookCopy = { id: null, identifier: crypto.randomUUID(), bookId: book.id };
     createBookCopy(id, data)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
@@ -65,22 +64,24 @@ const BookAbout: React.FC = () => {
           Number of copies : {book.numOfCopies}
         </div>
         <div className={classes['c-book-details__days']}>
-          <div style={{ marginBottom: '0.5rem' }}> {`Days (Renting will start from today):`}</div>
+          <div className={classes['c-book-details__days-explained']}>
+            {`Days (Renting will start from today):`}
+          </div>
           <Input
             type={'number'}
-            placeholder={'days...'}
+            placeholder={'Days'}
             id={'days'}
             name={'days'}
             setValue={changeDaysHandler}
           />
         </div>
         <div className={classes['c-book-details__buttons']}>
-          <Button name={'RENT'} clickHandler={rentBookHandler} />
+          <Button name={'Rent'} clickHandler={rentBookHandler} type={'primary'} />
           {isAdministrator() ? (
-            <Button name={'CREATE COPY'} clickHandler={createBookCopyHandler} />
+            <Button name={'Create copy'} clickHandler={createBookCopyHandler} type={'secondary'} />
           ) : null}
         </div>
-        {isAdministrator() ? <Link to={`/book/edit/${id}`}>Edit book</Link> : null}
+        {isAdministrator() ? <Link to={`/book/edit/${book.id}`}>Edit book</Link> : null}
       </div>
     </div>
   );

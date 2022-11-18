@@ -1,6 +1,6 @@
 import axios from '../../axios/axiosConfig';
 
-const rentBook = (id: string | undefined, days: string) => {
+const rentBook = (id: string, days: string) => {
   return axios
     .post(`/rent/book/${id}/user?rentPeriod=${days}`)
     .then((res) => res)

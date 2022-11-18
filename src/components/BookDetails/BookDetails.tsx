@@ -28,13 +28,13 @@ const BookDetails: React.FC = () => {
   };
 
   const deleteBookHandler = (): void => {
-    deleteBook(`${id}`).then((res) => {
+    deleteBook(book.id).then((res) => {
       navigate('/');
     });
   };
 
   const editBookHandler = (): void => {
-    editBook(`${id}`, book).then((res) => window.location.reload());
+    editBook(book.id, book).then((res) => window.location.reload());
   };
 
   useEffect(() => {
@@ -44,6 +44,10 @@ const BookDetails: React.FC = () => {
         setBook(res);
       })
       .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getBookHanlder();
   }, [id]);
 
   return (
