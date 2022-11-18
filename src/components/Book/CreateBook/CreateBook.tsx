@@ -21,23 +21,21 @@ const CreateBook: React.FC = () => {
 
   const submitCreateBookHandler = () => {
     createBook(book)
-      .then((res) => {
-        //TODO navigate to page with details about new book
+      .then(() => {
         navigate('/');
       })
       .catch(() => {
-        //TODO create error page
         navigate('/error-page');
       });
   };
 
   return (
     <div className={classes['c-create-book-form']}>
-      <h1 className={classes['c-create-book-form__page_title']}>Crate new book</h1>
+      <h1 className={classes['c-create-book-form__page-title']}>Crate new book</h1>
       <Input
         id="title"
         name="title"
-        placeholder="title..."
+        placeholder="Title"
         type="text"
         label="Title"
         setValue={changeHandler}
@@ -45,7 +43,7 @@ const CreateBook: React.FC = () => {
       <Input
         id="author"
         name="author"
-        placeholder="author..."
+        placeholder="Author"
         type="text"
         label="Author"
         setValue={changeHandler}
@@ -53,12 +51,12 @@ const CreateBook: React.FC = () => {
       <Input
         id="description"
         name="description"
-        placeholder="description..."
+        placeholder="Description"
         type="text"
         label="Description"
         setValue={changeHandler}
       />
-      <div className={classes['c-create-book-form__file_input']}>
+      <div className={classes['c-create-book-form__file-input']}>
         <label htmlFor="image">Image</label>
         <input
           type="file"
@@ -68,7 +66,7 @@ const CreateBook: React.FC = () => {
           onChange={(event) => changeImageHandler(event.target.files![0])}
         ></input>
       </div>
-      <div className={classes['c-create-book-form__page_button']}>
+      <div className={classes['c-create-book-form__page-button']}>
         <Button name={'Create new book'} clickHandler={submitCreateBookHandler} type={'primary'} />
       </div>
     </div>

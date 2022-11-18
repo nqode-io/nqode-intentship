@@ -4,16 +4,16 @@
   width: 40%;
   margin: 0 auto;
 
-  &__page_title {
+  &__page-title {
     text-align: center;
     margin-top: $space-l;
   }
 
-  &__page_button {
+  &__page-button {
     text-align: center;
   }
 
-  &__file_input {
+  &__file-input {
     display: flex;
     flex-direction: column;
     font-size: $fs-large;
