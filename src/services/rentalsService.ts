@@ -1,4 +1,4 @@
-import axiosInstance from 'customAxios/customAxios';
+import axios from 'customAxios/customAxios';
 
 interface RentalsParams {
   current: Boolean;
@@ -8,19 +8,47 @@ interface RentalsParams {
 }
 
 export const getRentals = async (params: RentalsParams) => {
-  const response = await axiosInstance.get('/rent/book', {
+  const response = await axios.get('/rent/book', {
     params: params
   });
   return response.data.content;
 };
 
 export const getRentalsByUser = async (id: number, params: RentalsParams) => {
-  const response = await axiosInstance.get(`/rent/user/${id}`, {
+  const response = await axios.get(`/rent/user/${id}`, {
     params: params
   });
   return response.data.content;
 };
 
 export const createRental = async (id: number, rentPeriod: number) => {
-  return await axiosInstance.post(`/rent/book/${id}/user`);
+  return await axios.post(`/rent/book/${id}/user`);
+};
+
+export const updateExtendRental = async (id: number, additionalRentPeriod: number) => {
+  const response = await axios.put(
+    `rent/${id}`,
+    {},
+    {
+      params: { additionalRentPeriod: additionalRentPeriod },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+  );
+  console.log('sada ', response);
+  return response.data;
+};
+
+export const updateCloseRental = async (id: number) => {
+  const response = await axios.put(
+    `rent/close/${id}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+  );
+  return response.data;
 };

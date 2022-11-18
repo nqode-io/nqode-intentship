@@ -7,7 +7,9 @@ const Profile = () => {
   return (
     <div className={classes['c-profile']}>
       <ProfileInfo />
+      <h1>Rented books</h1>
       <RentalsOverview componentType="current" />
+      <h1>History of rented books</h1>
       <RentalsOverview componentType="history" />
     </div>
   );

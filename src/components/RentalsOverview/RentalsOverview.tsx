@@ -27,9 +27,10 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
       params.current = false;
     }
 
-    const data = isRoleAdmin()
-      ? await getRentalsByUser(Number(userId), params)
-      : await getRentals(params);
+    const data =
+      isRoleAdmin() && pathLocation === 'profile'
+        ? await getRentalsByUser(userId, params)
+        : await getRentals(params);
     setRentals(data);
   };
 
@@ -39,10 +40,22 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
 
   return (
     <div className={classes['c-rentals-overview']}>
-      <div className={classes['c-rentals-overview__headers']}>
+      <div
+        className={`${classes['c-rentals-overview__headers']} ${
+          isAdmin
+            ? classes['c-rentals-overview__headers-admin']
+            : classes['c-rentals-overview__headers-user']
+        }`}
+      >
         <span>Book</span>
         <span>Start date</span>
         <span>End date</span>
+        {isAdmin ? (
+          <>
+            <span>User email</span>
+            <span>Extend rent period for (days):</span>
+          </>
+        ) : null}
       </div>
       <div className={classes['c-rentals-overview__list-container']}>
         {rentals.map((item) => (

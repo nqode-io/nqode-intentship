@@ -31,12 +31,6 @@ const BookDialog = (oldBook: BookModel) => {
           value={book.description}
           label="Description"
         />
-        <InputContainer
-          onChange={handleChange}
-          name="numOfCopies"
-          value={book.numOfCopies}
-          label="Number of Copies"
-        />
       </div>
       <div className={classes['c-book-dialog__button-container']}>
         <Button content={'Submit'} onClick={updateBook} />
