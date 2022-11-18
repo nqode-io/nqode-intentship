@@ -67,7 +67,7 @@ const User: React.FC<UserProps> = ({ user, editUser, deleteUser }) => {
             />
           </div>
           <div className={classes['c-user__input-holder']}>
-            <div className={classes['c-user__last']}>
+            <div className={classes['c-user__input']}>
               <Input
                 type={'address'}
                 placeholder={'Address'}
