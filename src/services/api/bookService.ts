@@ -1,26 +1,28 @@
-import axios, { AxiosResponse } from 'axios';
-import Book from 'components/model/Book';
+import axios from '../../axios/axiosConfig';
+import Book from 'model/Book';
 
-const backend_url = process.env.REACT_APP_BACKEND_URL;
-
-const getBook = (id: string | undefined) => {
-  return axios.get<Book>(`${backend_url}/book/${id}`).then((res) => {
+const getBook = (id: string) => {
+  return axios.get<Book>(`/book/${id}`).then((res) => {
     return res.data;
   });
 };
 
 const editBook = (id: string, book: Book) => {
-  return axios.put<Book>(`${backend_url}/book/${id}`, book).then((res) => {
+  return axios.put<Book>(`/book/${id}`, book).then((res) => {
     return res.data;
   });
 };
 
 const deleteBook = (id: string) => {
-  return axios.delete<Book>(`${backend_url}/book/${id}`).then((res) => {
+  return axios.delete<Book>(`/book/${id}`).then((res) => {
     return res.data;
   });
 };
 
-const bookService = { getBook, editBook, deleteBook };
+const createBook = (book: Book) => {
+  return axios.post(`/book`, book).then((res) => res);
+};
+
+const bookService = { getBook, editBook, deleteBook, createBook };
 
 export default bookService;
