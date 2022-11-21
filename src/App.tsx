@@ -7,18 +7,18 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import UserBookPage from 'pages/User/UserBookPage';
 import BookDetailsPage from 'pages/BookDetailsPage';
 import ManageUsersPage from 'pages/Admin/ManageUsersPage';
+import routeService from 'services/routeService';
 
 const App = () => {
+  const { getAllowedRoutes, getRedirect } = routeService;
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/books" element={<AdminBooksPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/book/:id" element={<UserBookPage />} />
-        <Route path="/book/edit/:id" element={<BookDetailsPage />} />
-        <Route path="/create-book" element={<CreateBookPage />} />
-        <Route path="/manage-users" element={<ManageUsersPage />} />
+        {getAllowedRoutes().map((route, index) => {
+          return <Route path={route.path} element={route.element} key={index} />;
+        })}
+        {getRedirect()}
       </Routes>
     </BrowserRouter>
   );

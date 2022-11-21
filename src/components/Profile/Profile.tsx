@@ -34,8 +34,6 @@ const Profile: React.FC = () => {
 
   const getCurrentlyRentedBooks = () => {
     axios.get(`/rent/user/${userId}?current=true`).then((res) => {
-      console.log(res);
-
       setCurrentlyRented(res.data.content);
     });
   };
