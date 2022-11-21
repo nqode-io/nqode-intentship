@@ -30,25 +30,13 @@ export const updateExtendRental = async (id: number, additionalRentPeriod: numbe
     `rent/${id}`,
     {},
     {
-      params: { additionalRentPeriod: additionalRentPeriod },
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
+      params: { additionalRentPeriod: additionalRentPeriod }
     }
   );
-  console.log('sada ', response);
   return response.data;
 };
 
 export const updateCloseRental = async (id: number) => {
-  const response = await axios.put(
-    `rent/close/${id}`,
-    {},
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    }
-  );
+  const response = await axios.put(`rent/close/${id}`);
   return response.data;
 };

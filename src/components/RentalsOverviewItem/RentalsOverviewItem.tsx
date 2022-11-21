@@ -38,7 +38,7 @@ const RentalsOverviewItem = ({
         <span>{title}</span>
         <span>{startRentDate}</span>
         <span>{endRentDate}</span>
-        {isRoleAdmin() ? (
+        {isRoleAdmin() && (
           <>
             <span>{userEmail}</span>
             <input
@@ -50,7 +50,7 @@ const RentalsOverviewItem = ({
             <Button content={'Extend rent'} onClick={extendRent} disabled={!additionalRentPeriod} />
             <Button content={'Close rent'} onClick={closeRent} />
           </>
-        ) : null}
+        )}
       </div>
       <div className={classes['c-rentals-overview-item__bottom-line']} />
     </div>
