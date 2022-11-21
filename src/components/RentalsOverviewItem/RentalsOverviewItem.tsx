@@ -1,8 +1,8 @@
 import Button from 'components/core/Button/Button';
 import RentalModel from 'models/RentalModel';
 import React, { useState } from 'react';
-import rentalsService from 'services/rentalsService';
-import tokenService from 'services/tokenService';
+import { updateExtendRental, updateCloseRental } from 'services/rentalsService';
+import { isRoleAdmin } from 'services/tokenService';
 import classes from './RentalsOverviewItem.module.scss';
 
 interface RentalsOverviewItemProps {
@@ -13,8 +13,6 @@ const RentalsOverviewItem = ({
   item: { id, title, startRentDate, endRentDate, userEmail }
 }: RentalsOverviewItemProps) => {
   const [additionalRentPeriod, setAdditionalRentPeriod] = useState<number>(0);
-  const isAdmin = tokenService.isRoleAdmin();
-  const { updateExtendRental, updateCloseRental } = rentalsService;
 
   const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAdditionalRentPeriod(parseInt(event.target.value));
@@ -32,7 +30,7 @@ const RentalsOverviewItem = ({
     <div className={classes['c-rentals-overview-item']}>
       <div
         className={`${classes['c-rentals-overview-item__info-container']} ${
-          isAdmin
+          isRoleAdmin()
             ? classes['c-rentals-overview-item__info-container-admin']
             : classes['c-rentals-overview-item__info-container-user']
         }`}
@@ -40,7 +38,7 @@ const RentalsOverviewItem = ({
         <span>{title}</span>
         <span>{startRentDate}</span>
         <span>{endRentDate}</span>
-        {isAdmin ? (
+        {isRoleAdmin() ? (
           <>
             <span>{userEmail}</span>
             <input

@@ -1,0 +1,28 @@
+@import 'variables.scss';
+
+.c-users-list {
+  padding: $space-l $space-xl;
+  margin: $space-l;
+
+  width: 90%;
+  background-color: $color-lightgray;
+  border-radius: $space-s;
+
+  &__headers {
+    margin-bottom: $space;
+    font-weight: bold;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    align-items: center;
+    padding: $space-xs 0;
+  }
+
+  &__list-container {
+    display: flex;
+    flex-direction: column;
+    gap: $space;
+  }
+}

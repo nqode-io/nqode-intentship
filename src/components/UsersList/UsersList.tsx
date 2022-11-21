@@ -1,6 +1,7 @@
-import UserModel from 'models/UserModel';
 import React, { useEffect, useState } from 'react';
-import userService from 'services/userService';
+import UsersListItem from 'components/UsersListItem/UsersListItem';
+import UserModel from 'models/UserModel';
+import { getUsers } from 'services/userService';
 import classes from './UsersList.module.scss';
 
 interface Pagable {
@@ -11,8 +12,7 @@ interface Pagable {
 }
 
 const UsersList = () => {
-  const [users, setUsers] = useState<UserModel>({} as UserModel);
-  const { getUsers } = userService;
+  const [users, setUsers] = useState<UserModel[]>([]);
 
   const retriveUsers = async () => {
     const data = await getUsers();
@@ -23,7 +23,30 @@ const UsersList = () => {
     retriveUsers();
   }, []);
 
-  return <div></div>;
+  return (
+    <div className={classes['c-users-list']}>
+      <div className={classes['c-users-list__headers']}>
+        <span>Email</span>
+        <span>First name</span>
+        <span>Last name</span>
+        <span>Address</span>
+        <span>Phone number</span>
+      </div>
+      <div className={classes['c-users-list__list-container']}>
+        {users.map((item) => (
+          <UsersListItem
+            key={item.id}
+            id={item.id}
+            email={item.email}
+            firstName={item.firstName}
+            lastName={item.lastName}
+            address={item.address}
+            phoneNumber={item.phoneNumber}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default UsersList;
