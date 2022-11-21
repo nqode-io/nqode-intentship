@@ -8,6 +8,7 @@ import Navbar from 'components/Navbar/Navbar';
 import Dashboard from 'pages/Admin/Dashboard/Dashboard';
 import Profile from 'pages/Profile/Profile';
 import { RoleContext } from 'contexts/roleContext';
+import UsersList from 'components/UsersList/UsersList';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/booksoverview" element={<BooksOverview />} />
         <Route path="/book/:id" element={<SingleBook />} />
         <Route path="/profile/:id" element={<Profile />} />
+        <Route path="/users" element={<UsersList />} />
       </Routes>
     </div>
   );

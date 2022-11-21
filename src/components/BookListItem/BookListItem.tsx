@@ -19,7 +19,7 @@ const BookListItem = ({ item }: BookProps) => {
       </div>
       <div className={classes['c-book-list-item__info-container']}>
         <Link to={`/book/${item.id}`} className={classes['c-book-list-item__link']}>
-          <strong>{item.title}</strong>
+          {item.title}
         </Link>
         {item.author}
       </div>

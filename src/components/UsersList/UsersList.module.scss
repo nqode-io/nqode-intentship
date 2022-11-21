@@ -1,6 +1,6 @@
 @import 'variables.scss';
 
-.c-rentals-overview {
+.c-users-list {
   padding: $space-l $space-xl;
   margin: $space-l;
 
@@ -13,17 +13,11 @@
     font-weight: bold;
 
     display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
     justify-items: center;
     align-items: center;
     padding: $space-xs 0;
-
-    &-admin {
-      grid-template-columns: repeat(7, 1fr);
-    }
-
-    &-user {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
   &__list-container {

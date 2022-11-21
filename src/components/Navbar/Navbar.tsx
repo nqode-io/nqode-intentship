@@ -19,7 +19,7 @@ const Navbar = () => {
         <Link to="/dashboard" className={classes['c-navbar__link']}>
           Overview
         </Link>
-        <Link to="#" className={classes['c-navbar__link']}>
+        <Link to="/users" className={classes['c-navbar__link']}>
           Users
         </Link>
       </>

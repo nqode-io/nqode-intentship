@@ -4,7 +4,7 @@ import RentalModel from 'models/RentalModel';
 import classes from './RentalsOverview.module.scss';
 import { getRentals, getRentalsByUser } from 'services/rentalsService';
 import { isRoleAdmin } from 'services/tokenService';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 interface RentalsOverviewProps {
   componentType: 'current' | 'history';
@@ -14,6 +14,8 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
   const [rentals, setRentals] = useState<RentalModel[]>([]);
 
   const userId = useParams();
+  const location = useLocation();
+  const pathLocation = location.pathname;
 
   const params = {
     current: true,
@@ -27,9 +29,10 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
       params.current = false;
     }
 
-    const data = isRoleAdmin()
-      ? await getRentalsByUser(Number(userId), params)
-      : await getRentals(params);
+    const data =
+      isRoleAdmin() && pathLocation === 'profile'
+        ? await getRentalsByUser(Number(userId), params)
+        : await getRentals(params);
     setRentals(data);
   };
 
@@ -39,10 +42,22 @@ const RentalsOverview = ({ componentType }: RentalsOverviewProps) => {
 
   return (
     <div className={classes['c-rentals-overview']}>
-      <div className={classes['c-rentals-overview__headers']}>
+      <div
+        className={`${classes['c-rentals-overview__headers']} ${
+          isRoleAdmin()
+            ? classes['c-rentals-overview__headers-admin']
+            : classes['c-rentals-overview__headers-user']
+        }`}
+      >
         <span>Book</span>
         <span>Start date</span>
         <span>End date</span>
+        {isRoleAdmin() && (
+          <>
+            <span>User email</span>
+            <span>Extend rent period for (days):</span>
+          </>
+        )}
       </div>
       <div className={classes['c-rentals-overview__list-container']}>
         {rentals.map((item) => (

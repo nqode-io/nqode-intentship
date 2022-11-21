@@ -6,6 +6,11 @@ export const getUserById = async (id: number) => {
   return response.data;
 };
 
+export const getUsers = async () => {
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/user`);
+  return response.data.content;
+};
+
 export const updateUser = async (id: number, user: UserModel) => {
   const response = await axios.put(`${process.env.REACT_APP_BASE_URL}/user/${id}`, user);
 
