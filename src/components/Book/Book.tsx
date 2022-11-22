@@ -9,6 +9,7 @@ import BookDialog from 'components/BookDialog/BookDialog';
 import { isRoleAdmin } from 'services/tokenService';
 import { createRental } from 'services/rentalsService';
 import InputContainer from 'components/core/InputContainer/InputContainer';
+import { getBookById, deleteBook } from 'services/booksService';
 
 const Book = () => {
   const [book, setBook] = useState<BookModel>({} as BookModel);
@@ -19,22 +20,13 @@ const Book = () => {
   const navigate = useNavigate();
 
   const retriveBook = async () => {
-    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setBook(response.data);
+    const data = await getBookById(Number(id));
+    setBook(data);
   };
 
-  const deleteBook = async () => {
-    await axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/book/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
-        }
-      })
-      .then(() => navigate('/booksoverview'));
+  const handleDelete = async () => {
+    await deleteBook(Number(id));
+    navigate('/booksoverview');
   };
 
   const handleRentPeriod = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,14 +48,7 @@ const Book = () => {
       </div>
       {modify ? (
         <div className={classes['c-book__modify-container']}>
-          <BookDialog
-            id={book.id}
-            title={book.title}
-            author={book.author}
-            description={book.description}
-            imagePath={book.imagePath}
-            numOfCopies={book.numOfCopies}
-          />
+          <BookDialog oldBook={book} componentType={'modify'} />
           <Button content="Cancel" onClick={() => setModify(false)} />
         </div>
       ) : (
@@ -82,7 +67,7 @@ const Book = () => {
             {isRoleAdmin() ? (
               <>
                 <Button content="Edit" onClick={() => setModify(true)} />
-                <Button content="Delete" onClick={deleteBook} />
+                <Button content="Delete" onClick={handleDelete} />
               </>
             ) : (
               <div>
